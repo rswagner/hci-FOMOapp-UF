@@ -1,5 +1,5 @@
 node_modules
-public
+private/db_credentials.php
 .tmp
 .idea
 client/bower_components
