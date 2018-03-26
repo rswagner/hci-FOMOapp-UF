@@ -6,24 +6,19 @@ if(!isset($_GET['id'])) {
   redirect_to(url_for('/users/info.php'));
 }
   $id = $_GET['id'];
-  $message = $_GET['message'] ?? 'unsaved';
 
-  $sql = "SELECT * FROM users.Events WHERE EventID='" . db_espace($db,$id) . "'";
+  $sql = "SELECT users.Events.*, users.Organizations.OrganizationName FROM users.Events ";
+  $sql .= "INNER JOIN users.Organizations ON users.Events.OrganizationID = users.Organizations.OrganizationID ";
+  $sql .= "WHERE EventID ='" . $id . "'";
   $single_event_set = mysqli_query($db, $sql);
 
   $event = mysqli_fetch_assoc($single_event_set);
   mysqli_free_result($single_event_set);
 
-  $sql = "SELECT OrganizationName FROM users.Organizations WHERE OrganizationID='" . $event['OrganizationID'] . "'";
-  $org_of_event_set = mysqli_query($db, $sql);
-
-  $org_of_event = mysqli_fetch_assoc($org_of_event_set);
-  mysqli_free_result($org_of_event_set);
-
   $sql = "SELECT * FROM users.SavedEvents WHERE SavedEventID='" . $id . "'";
   $sql .= "AND StudentID='" . $_SESSION['id'] . "'";
   $saved_event_set = mysqli_query($db, $sql);
-  
+
   $saved_event = mysqli_fetch_assoc($saved_event_set);
   mysqli_free_result($saved_event_set);
 ?>
@@ -67,7 +62,7 @@ if(!isset($_GET['id'])) {
 
   <div>
     <h2><?php echo $event['EventName']; ?></h2>
-    <h3>By <?php echo  $org_of_event['OrganizationName']?></h3>
+    <h3>By <?php echo  $event['OrganizationName']?></h3>
     <h4><?php echo $event['Location']; ?></h4>
     <h4><?php echo $event['Time']; ?></h4>
     <p><?php echo $event['Description']; ?></p>
