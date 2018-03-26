@@ -16,7 +16,6 @@ if(!isset($_GET['id'])) {
 
   $sql = "SELECT * FROM users.SavedEvents WHERE SavedEventID='" . $id . "'";
   $sql .= "AND StudentID='" . $_SESSION['id'] . "'";
-  //$sql .= "AND SavedEventName='" .  'testName' . "'";
   $saved_event_set = mysqli_query($db, $sql);
 
   $saved_event = mysqli_fetch_assoc($saved_event_set);
