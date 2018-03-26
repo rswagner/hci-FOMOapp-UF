@@ -11,4 +11,4 @@ if (!isset($page_title)) $page_title = 'User Area'
     <p>User: <?php echo $_SESSION['username'] ?? ''; ?></p>
     <a href="<?php echo url_for('/users/logout.php');?>">Logout</a>
     <a href="<?php echo url_for('/users/allEvents.php');?>">Explore Events</a>
-    <a href="">Profile</a><br><br>
+    <a href="<?php echo url_for('/users/profile.php');?>">Profile</a><br><br>
