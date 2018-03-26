@@ -35,7 +35,7 @@ if (is_post_request()){
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
 <form action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post">
-  Event Name:<br />
+  Event Name:<br/>
   <input type="text" name="eventName"/><br/>
   Location:<br/>
   <input type="text" name="location"/><br/>

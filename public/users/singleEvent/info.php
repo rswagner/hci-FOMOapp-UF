@@ -11,12 +11,12 @@ if(!isset($_GET['id'])) {
   $sql .= "INNER JOIN users.Organizations ON users.Events.OrganizationID = users.Organizations.OrganizationID ";
   $sql .= "WHERE EventID ='" . $id . "'";
   $single_event_set = mysqli_query($db, $sql);
-
   $event = mysqli_fetch_assoc($single_event_set);
   mysqli_free_result($single_event_set);
 
   $sql = "SELECT * FROM users.SavedEvents WHERE SavedEventID='" . $id . "'";
   $sql .= "AND StudentID='" . $_SESSION['id'] . "'";
+  //$sql .= "AND SavedEventName='" .  'testName' . "'";
   $saved_event_set = mysqli_query($db, $sql);
 
   $saved_event = mysqli_fetch_assoc($saved_event_set);
@@ -31,7 +31,6 @@ if(!isset($_GET['id'])) {
       <?php } else { ?>
         $("#saveEvent").html("Save Event")
       <?php }?>
-
       $("#saveEvent").click(function(){
         if ($("#saveEvent").html() == "Unsave Event"){
           $.ajax({
