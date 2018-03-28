@@ -3,7 +3,7 @@
 
 <?php $page_title = 'Single Event';
 if(!isset($_GET['id'])) {
-  redirect_to(url_for('/users/info.php'));
+  redirect_to(url_for('/users/allEvents.php'));
 }
   $id = $_GET['id'];
 
@@ -20,6 +20,11 @@ if(!isset($_GET['id'])) {
 
   $saved_event = mysqli_fetch_assoc($saved_event_set);
   mysqli_free_result($saved_event_set);
+
+  $sql = "SELECT TagName FROM users.Tags WHERE TagID IN";
+  $sql .= "(SELECT TagID FROM users.EventTags WHERE ";
+  $sql .= "EventID = '" . $id . "')";
+  $eventTags_set = mysqli_query($db, $sql);
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
@@ -64,6 +69,16 @@ if(!isset($_GET['id'])) {
     <h4><?php echo $event['Location']; ?></h4>
     <h4><?php echo $event['Time']; ?></h4>
     <p><?php echo $event['Description']; ?></p>
+    <h3>My Tags</h3>
+    <?php if ($_SESSION['type'] == 'org'){?>
+      <a href="<?php echo url_for('/users/singleEvent/editTags.php?id=' . $event['EventID']);?>">Edit Tags</a>
+    <?php } ?>
+    <ul>
+      <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>
+      <li> <?php echo $eventTag['TagName']; ?> </li>
+      <?php }
+      mysqli_free_result($eventTags_set);?>
+    </ul>
     <?php if ($_SESSION['type'] == 'org'){?>
       <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>">Update</a>
       <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
