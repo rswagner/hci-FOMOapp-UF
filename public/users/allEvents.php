@@ -21,14 +21,6 @@ if ($_SESSION['type'] == "student"){
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var recommendText = "<tr><th>Name</th><th>Location</th><th>&nbsp;</th></tr>";
-    <?php while($event = mysqli_fetch_assoc($recommendEvent_set)){ ?>
-    recommendText += "<tr><td><?php echo $event['EventName'] ?></td>";
-    recommendText += "<td><?php echo $event['Location'] ?></td>";
-    recommendText += "<td><a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a><td></tr>";
-    <?php }
-    mysqli_free_result($recommendEvent_set); ?>
-
     var allEventsText = "<tr><th>Name</th><th>Location</th><th>&nbsp;</th></tr>";
     <?php while($event = mysqli_fetch_assoc($event_set)){ ?>
     allEventsText += "<tr><td><?php echo $event['EventName'] ?></td>";
@@ -36,12 +28,21 @@ if ($_SESSION['type'] == "student"){
     allEventsText += "<td><a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a><td></tr>";
     <?php }
     mysqli_free_result($event_set); ?>
-
     $("#eventsData").html(allEventsText);
 
-    $("#recommend").click(function(){ $("#eventsData").html(recommendText); });
+    <?php if ($_SESSION['type'] == "student"){?>
+      var recommendText = "<tr><th>Name</th><th>Location</th><th>&nbsp;</th></tr>";
+      <?php while($event = mysqli_fetch_assoc($recommendEvent_set)){ ?>
+      recommendText += "<tr><td><?php echo $event['EventName'] ?></td>";
+      recommendText += "<td><?php echo $event['Location'] ?></td>";
+      recommendText += "<td><a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a><td></tr>";
+      <?php }
+      mysqli_free_result($recommendEvent_set); ?>
 
-    $("#current").click(function(){ $("#eventsData").html(allEventsText); });
+      $("#recommend").click(function(){ $("#eventsData").html(recommendText); });
+
+      $("#current").click(function(){ $("#eventsData").html(allEventsText); });
+    <?php }?>
   });
   </script>
 
