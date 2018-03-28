@@ -36,7 +36,7 @@
 
 ?>
 
-<form action="<?php echo url_for('/users/singleEvent/editTags.php?id=' . $id)?>" method="post">
+<form action="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $id)?>" method="post">
   <?php while ($tag = mysqli_fetch_assoc($allTags_set)) {
       if ($tag["users.EventTags.EventID = '" . $id . "'"]){?>
         <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" checked="checked"><?php echo $tag['TagName']?><br>

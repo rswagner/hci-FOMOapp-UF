@@ -71,7 +71,7 @@ if(!isset($_GET['id'])) {
     <p><?php echo $event['Description']; ?></p>
     <h3>My Tags</h3>
     <?php if ($_SESSION['type'] == 'org'){?>
-      <a href="<?php echo url_for('/users/singleEvent/editTags.php?id=' . $event['EventID']);?>">Edit Tags</a>
+      <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>">Edit Tags</a>
     <?php } ?>
     <ul>
       <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>

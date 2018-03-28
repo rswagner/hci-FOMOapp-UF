@@ -46,7 +46,7 @@ if ($_SESSION['type'] == "student"){
       mysqli_free_result($savedEvents_set);
     ?>
     <h3>My Tags</h3>
-    <a href="<?php echo url_for('/users/profile/editTags.php');?>">Edit Tags</a>
+    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
     <ul>
       <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
       <li> <?php echo $userTag['TagName']; ?> </li>

@@ -33,7 +33,7 @@
 
 ?>
 
-<form action="<?php echo url_for('/users/profile/editTags.php')?>" method="post">
+<form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
   <?php while ($tag = mysqli_fetch_assoc($allTags_set)) {
       if ($tag["users.UserTags.StudentID = '" . $_SESSION['id'] . "'"]){?>
         <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" checked="checked"><?php echo $tag['TagName']?><br>
