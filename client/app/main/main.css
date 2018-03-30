@@ -10,6 +10,9 @@ html, body {
     display: none;
   }
 }
+.nav-fixed{
+  margin-bottom: .5em;
+}
 .nav-fixed nav img {
   height: 100px;
   align-content: center;
@@ -32,4 +35,25 @@ html, body {
 }
 nav ul a{
   padding: 15px 15px 15px 15px;
+}
+
+.tabs .tab a{
+  color: #084b81;
+}
+
+.tabs .tab a.active{
+  color: #084b81;
+}
+.tabs .tab a:hover{
+  color: #db662c;
+  background-color: rgba(100,100,66,.10);
+}
+.tabs .indicator{
+  background-color: #db662c;
+}
+.carousel{
+  height: 90% !important;
+}
+.carousel .carousel-item {
+  width: 100%;
 }
