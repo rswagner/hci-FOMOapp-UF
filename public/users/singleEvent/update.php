@@ -17,13 +17,17 @@ if(is_get_request()) {
 }else {
   $event['EventName'] = $_POST['eventName'] ?? '';
   $event['Location'] = $_POST['location'] ?? '';
-  $event['Time'] = $_POST['dateTime'] ?? '';
+  $event['Date'] = $_POST['date'] ?? '';
+  $event['StartTime'] = $_POST['startTime'] ?? '';
+  $event['EndTime'] = $_POST['endTime'] ?? '';
   $event['Description'] = $_POST['description'] ?? '';
 
   $sql = "UPDATE users.Events SET ";
   $sql .= "EventName='" . $event['EventName'] . "', ";
   $sql .= "Location='" . $event['Location'] . "', ";
-  $sql .= "Time='" . $event['Time'] . "', ";
+  $sql .= "Date='" . $event['Date'] . "', ";
+  $sql .= "StartTime='" . $event['StartTime'] . "', ";
+  $sql .= "EndTime='" . $event['EndTime'] . "', ";
   $sql .= "Description='" . $event['Description'] . "' ";
   $sql .= "WHERE EventID='" . $id . "' ";
   $sql .= "LIMIT 1";
@@ -45,7 +49,11 @@ if(is_get_request()) {
   Location:<br/>
   <input type="text" name="location" value="<?php echo $event['Location']; ?>" /><br/>
   Date: (MM/DD/YYYY)<br />
-  <input type="datetime-local" name="dateTime" value="2018-06-01T08:30" /><br/>
+  <input type="date" name="date" value="<?php echo $event['Date']; ?>" /><br/>
+  Start Time:<br/>
+  <input type="time" name="startTime" value="<?php echo $event['StartTime']; ?>" /><br/>
+  End Time:<br/>
+  <input type="time" name="endTime" value="<?php echo $event['EndTime']; ?>" /><br/>
   Description<br/>
   <textarea name="description" cols="40" rows="5"><?php echo $event['Description']; ?></textarea>
   <input type="submit" name="submit" value="Submit"  />

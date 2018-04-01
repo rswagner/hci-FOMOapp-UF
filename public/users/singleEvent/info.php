@@ -67,9 +67,10 @@ if(!isset($_GET['id'])) {
     <h2><?php echo $event['EventName']; ?></h2>
     <h3>By <?php echo  $event['OrganizationName']?></h3>
     <h4><?php echo $event['Location']; ?></h4>
-    <h4><?php echo $event['Time']; ?></h4>
+    <h4><?php echo $event['Date']; ?></h4>
+    <h4><?php echo $event['StartTime']; ?> - <?php echo $event['EndTime']; ?></h4>
     <p><?php echo $event['Description']; ?></p>
-    <h3>My Tags</h3>
+    <h3>Event Tags</h3>
     <?php if ($_SESSION['type'] == 'org'){?>
       <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>">Edit Tags</a>
     <?php } ?>
