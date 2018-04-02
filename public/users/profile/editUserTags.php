@@ -26,20 +26,15 @@
 
   }
 
-  $sql = "SELECT users.Tags.*, users.UserTags.StudentID = '" . $_SESSION['id'] . "' ";
-  $sql .= "FROM users.Tags LEFT JOIN users.UserTags ";
-  $sql .= "ON users.Tags.TagID=users.UserTags.TagID Order by users.Tags.TagName";
+  $sql = "SELECT * FROM users.Tags Order by users.Tags.TagName";
   $allTags_set = mysqli_query($db, $sql);
 
 ?>
 
 <form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
-  <?php while ($tag = mysqli_fetch_assoc($allTags_set)) {
-      if ($tag["users.UserTags.StudentID = '" . $_SESSION['id'] . "'"]){?>
-        <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" checked="checked"><?php echo $tag['TagName']?><br>
-<?php } else{ ?>
+  <?php while ($tag = mysqli_fetch_assoc($allTags_set))?>
         <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>"><?php echo $tag['TagName']?><br>
-<?php }
+  <?php
     }
   mysqli_free_result($allTags_set);?>
   <input type="submit" value="Submit">

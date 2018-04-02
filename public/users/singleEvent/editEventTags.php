@@ -29,21 +29,16 @@
 
   }
 
-  $sql = "SELECT users.Tags.*, users.EventTags.EventID = '" . $id . "' ";
-  $sql .= "FROM users.Tags LEFT JOIN users.EventTags ";
-  $sql .= "ON users.Tags.TagID=users.EventTags.TagID Order by users.Tags.TagName";
+  $sql = "SELECT * FROM users.Tags Order by users.Tags.TagName";
   $allTags_set = mysqli_query($db, $sql);
 
 ?>
 
 <form action="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $id)?>" method="post">
-  <?php while ($tag = mysqli_fetch_assoc($allTags_set)) {
-      if ($tag["users.EventTags.EventID = '" . $id . "'"]){?>
-        <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" checked="checked"><?php echo $tag['TagName']?><br>
-<?php } else{ ?>
-        <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>"><?php echo $tag['TagName']?><br>
-<?php }
-    }
+  <?php while ($tag = mysqli_fetch_assoc($allTags_set)) { ?>
+    <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>"><?php echo $tag['TagName']?><br>
+  <?php
+        }
   mysqli_free_result($allTags_set);?>
   <input type="submit" value="Submit">
 </form>

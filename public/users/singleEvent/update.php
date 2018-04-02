@@ -21,6 +21,8 @@ if(is_get_request()) {
   $event['StartTime'] = $_POST['startTime'] ?? '';
   $event['EndTime'] = $_POST['endTime'] ?? '';
   $event['Description'] = $_POST['description'] ?? '';
+  $event['Latitude'] = $_POST['lat'] ?? '';
+  $event['Longitude'] = $_POST['long'] ?? '';
 
   $sql = "UPDATE users.Events SET ";
   $sql .= "EventName='" . $event['EventName'] . "', ";
@@ -28,7 +30,9 @@ if(is_get_request()) {
   $sql .= "Date='" . $event['Date'] . "', ";
   $sql .= "StartTime='" . $event['StartTime'] . "', ";
   $sql .= "EndTime='" . $event['EndTime'] . "', ";
-  $sql .= "Description='" . $event['Description'] . "' ";
+  $sql .= "Description='" . $event['Description'] . "', ";
+  $sql .= "Longitude='" . $event['Longitude'] . "', ";
+  $sql .= "Latitude='" . $event['Latitude'] . "' ";
   $sql .= "WHERE EventID='" . $id . "' ";
   $sql .= "LIMIT 1";
 
@@ -43,11 +47,30 @@ if(is_get_request()) {
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDSLycBJS9PbQbeqJzrik9q7JQa4blLq-U&libraries=places" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('location').value = place.name;
+            document.getElementById('cityLat').value = place.geometry.location.lat();
+            document.getElementById('cityLng').value = place.geometry.location.lng();
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
 <form action="<?php echo url_for('/users/singleEvent/update.php?id=' . $id);?>" method="post">
   Event Name:<br />
   <input type="text" name="eventName" value="<?php echo $event['EventName']; ?>" /><br/>
   Location:<br/>
-  <input type="text" name="location" value="<?php echo $event['Location']; ?>" /><br/>
+  <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" placeholder="<?php echo $event['Location']?>"/><br/>
+  <input type="hidden" id="cityLat" name="lat" />
+  <input type="hidden" id="cityLng" name="long" />
+  <input type="hidden" id="location" name="location" />
   Date: (MM/DD/YYYY)<br />
   <input type="date" name="date" value="<?php echo $event['Date']; ?>" /><br/>
   Start Time:<br/>
@@ -55,7 +78,7 @@ if(is_get_request()) {
   End Time:<br/>
   <input type="time" name="endTime" value="<?php echo $event['EndTime']; ?>" /><br/>
   Description<br/>
-  <textarea name="description" cols="40" rows="5"><?php echo $event['Description']; ?></textarea>
+  <textarea name="description" cols="40" rows="5"><?php echo $event['Description']; ?></textarea><br>
   <input type="submit" name="submit" value="Submit"  />
 </form>
 
