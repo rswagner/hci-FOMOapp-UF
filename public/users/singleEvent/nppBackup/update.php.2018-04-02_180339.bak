@@ -75,7 +75,6 @@ else { // POST
   $event['Latitude'] = $_POST['lat'] ?? '';
   $event['Longitude'] = $_POST['long'] ?? '';
   $event['Longitude'] = $_POST['fileToUpload'] ?? '';
-  $event['EventPic'] = $profile_pic['ProfilePic'] ?? ''; 
 
   $sql = "UPDATE users.Events SET ";
   $sql .= "EventName='" . $event['EventName'] . "', ";
@@ -85,8 +84,8 @@ else { // POST
   $sql .= "EndTime='" . $event['EndTime'] . "', ";
   $sql .= "Description='" . $event['Description'] . "', ";
   $sql .= "Longitude='" . $event['Longitude'] . "', ";
-  $sql .= "Latitude='" . $event['Latitude'] . "', ";
-  $sql .= "EventPic='" . $profile_pic['ProfilePic'] . "' ";
+  $sql .= "Latitude='" . $event['Latitude'] . "' ";
+   $sql .= "Latitude='" . $profile_pic['ProfilePic'] . "' ";
   $sql .= "WHERE EventID='" . $id . "' ";
   $sql .= "LIMIT 1";
 

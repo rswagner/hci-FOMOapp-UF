@@ -27,8 +27,7 @@ if (is_post_request()){
   $sql .= "'" . $event['Description'] . "',";
   $sql .= "'" . $event['EventName'] . "',";
   $sql .= "'" . $event['Longitude'] . "',";
-  $sql .= "'" . $event['Latitude'] . "',";
-  $sql .= "'" . $event['EventPic'] . "'";
+  $sql .= "'" . $event['Latitude'] . "'";
   $sql .= ")";
   $result = mysqli_query($db, $sql);
 

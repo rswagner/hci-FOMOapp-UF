@@ -47,6 +47,12 @@ if (is_post_request()){
     $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
     $sql .= "LIMIT 1";	
 	$result = mysqli_query($db, $sql);
+  //if ($result){	
+  //  redirect_to(url_for('/users/profile/profile.php'));
+  //}else {
+    // UPDATE failed
+    //echo mysqli_error($db);
+  //}
 
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

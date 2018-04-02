@@ -75,7 +75,7 @@ else { // POST
   $event['Latitude'] = $_POST['lat'] ?? '';
   $event['Longitude'] = $_POST['long'] ?? '';
   $event['Longitude'] = $_POST['fileToUpload'] ?? '';
-  $event['EventPic'] = $profile_pic['ProfilePic'] ?? ''; 
+  $event['EventPic'] =
 
   $sql = "UPDATE users.Events SET ";
   $sql .= "EventName='" . $event['EventName'] . "', ";

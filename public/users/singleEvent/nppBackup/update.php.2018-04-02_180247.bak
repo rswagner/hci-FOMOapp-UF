@@ -22,6 +22,11 @@ else { // POST
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
 	$profile_pic['ProfilePic'] = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
+	$sql = "UPDATE users.Users SET ";
+	$sql .= "ProfilePic='" . $profile_pic['ProfilePic'] . "' ";
+    $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
+    $sql .= "LIMIT 1";	
+	$result = mysqli_query($db, $sql);
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image
@@ -75,7 +80,6 @@ else { // POST
   $event['Latitude'] = $_POST['lat'] ?? '';
   $event['Longitude'] = $_POST['long'] ?? '';
   $event['Longitude'] = $_POST['fileToUpload'] ?? '';
-  $event['EventPic'] = $profile_pic['ProfilePic'] ?? ''; 
 
   $sql = "UPDATE users.Events SET ";
   $sql .= "EventName='" . $event['EventName'] . "', ";
@@ -85,8 +89,7 @@ else { // POST
   $sql .= "EndTime='" . $event['EndTime'] . "', ";
   $sql .= "Description='" . $event['Description'] . "', ";
   $sql .= "Longitude='" . $event['Longitude'] . "', ";
-  $sql .= "Latitude='" . $event['Latitude'] . "', ";
-  $sql .= "EventPic='" . $profile_pic['ProfilePic'] . "' ";
+  $sql .= "Latitude='" . $event['Latitude'] . "' ";
   $sql .= "WHERE EventID='" . $id . "' ";
   $sql .= "LIMIT 1";
 
