@@ -15,10 +15,9 @@ if ($_SESSION['type'] == "student"){
   $userTags_set = mysqli_query($db, $sql);
   
   $sql = "SELECT ProfilePic FROM users.Users WHERE ";
-  $sql .= "UserID ='" . $_SESSION['id'] . "'";
+  $sql .= "StudentID = '" . $_SESSION['id'] . "')";
   $image_set = mysqli_query($db, $sql);
-  $profile_pic = mysqli_fetch_assoc($image_set);
-   mysqli_free_result($image_set);
+    //mysqli_free_result($image_set);
 }
 // org
 else {
@@ -39,6 +38,7 @@ else {
 //readfile($content);
 if (is_post_request()){
 	$profile_pic; 
+	//$profile_pic['ProfilePic'] = $_POST['fileToUpload'] ?? '';
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
 	$profile_pic['ProfilePic'] = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
@@ -111,7 +111,10 @@ if (is_post_request()){
   <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
     <?php if ($_SESSION['type'] == 'student'){ ?>
     <table>
+	  <?php $profile_pic = mysqli_fetch_assoc($image_set) ?>
 	  <p>"<?php echo $profile_pic['ProfilePic'] ?>" </p> 
+	  <p>"<?php //echo $image['ProfilePic'] ?>" </p> 
+
 	  <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
 
 	  <th>Your Saved Events</th>

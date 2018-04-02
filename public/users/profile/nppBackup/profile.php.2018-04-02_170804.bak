@@ -14,11 +14,10 @@ if ($_SESSION['type'] == "student"){
   $sql .= "StudentID = '" . $_SESSION['id'] . "')";
   $userTags_set = mysqli_query($db, $sql);
   
-  $sql = "SELECT ProfilePic FROM users.Users WHERE ";
-  $sql .= "UserID ='" . $_SESSION['id'] . "'";
+  $sql = "SELECT ProfilePic FROM users.Users WHERE";
+  $sql .= "StudentID = '" . $_SESSION['id'] . "')";
   $image_set = mysqli_query($db, $sql);
-  $profile_pic = mysqli_fetch_assoc($image_set);
-   mysqli_free_result($image_set);
+    //mysqli_free_result($image_set);
 }
 // org
 else {
@@ -38,21 +37,22 @@ else {
 //$content = $row['https://s3.us-east-2.amazonaws.com/hci-fomo/logan.jpg'];
 //readfile($content);
 if (is_post_request()){
-	$profile_pic; 
+	$profile_pic = mysqli_fetch_assoc($image_set); 
+	$profile_pic['ProfilePic'] = $_POST['fileToUpload'] ?? '';
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
 	$profile_pic['ProfilePic'] = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
 	$sql = "UPDATE users.Users SET ";
-	$sql .= "ProfilePic='" . $profile_pic['ProfilePic'] . "' ";
-    $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
+	$sql .= "ProfilePic='" . $profile_pic['ProfilePic'] . "'";
+    $sql .= "WHERE StudentID='" . $_SESSION['id'] . "' ";
     $sql .= "LIMIT 1";	
 	$result = mysqli_query($db, $sql);
-  //if ($result){	
-  //  redirect_to(url_for('/users/profile/profile.php'));
-  //}else {
+  if ($result){	
+    redirect_to(url_for('/users/profile/profile.php'));
+  }else {
     // UPDATE failed
-    //echo mysqli_error($db);
-  //}
+    echo mysqli_error($db);
+  }
 
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -111,8 +111,9 @@ if (is_post_request()){
   <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
     <?php if ($_SESSION['type'] == 'student'){ ?>
     <table>
-	  <p>"<?php echo $profile_pic['ProfilePic'] ?>" </p> 
-	  <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
+	  <?php $image = mysqli_fetch_assoc($image_set) ?>
+	  <p>"<?php echo $image['ProfilePic'] ?>" </p> 
+	  <img style="width:200px;height:170px;" src="<?php echo $image['ProfilePic'] ?>" alt="image" >
 
 	  <th>Your Saved Events</th>
       <tr>

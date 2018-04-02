@@ -14,17 +14,15 @@ if ($_SESSION['type'] == "student"){
   $sql .= "StudentID = '" . $_SESSION['id'] . "')";
   $userTags_set = mysqli_query($db, $sql);
   
-  $sql = "SELECT ProfilePic FROM users.Users WHERE ";
-  $sql .= "UserID ='" . $_SESSION['id'] . "'";
+  $sql = "SELECT * FROM users.images";
   $image_set = mysqli_query($db, $sql);
-  $profile_pic = mysqli_fetch_assoc($image_set);
-   mysqli_free_result($image_set);
+    //mysqli_free_result($image_set);
 }
 // org
 else {
   $sql = "SELECT OrganizationDescription FROM users.Organizations WHERE ";
-  $sql .= "OrganizationID = '" . $_SESSION['id'] . "'"; 
-  $organizationInfo_set = mysqli_query($db, $sql); 
+  $sql .= "OrganizationID = '" . $_SESSION['id'] . "'";
+  $organizationInfo_set = mysqli_query($db, $sql);
 
   $organizationInfo = mysqli_fetch_assoc($organizationInfo_set);
   mysqli_free_result($organizationInfo_set);
@@ -38,21 +36,21 @@ else {
 //$content = $row['https://s3.us-east-2.amazonaws.com/hci-fomo/logan.jpg'];
 //readfile($content);
 if (is_post_request()){
-	$profile_pic; 
+	$profile_pic;
+	$profile_pic['ImageName'] = $_POST['fileToUpload'] ?? '';
 	$target_dir = "uploads/";
 	$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
-	$profile_pic['ProfilePic'] = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
-	$sql = "UPDATE users.Users SET ";
-	$sql .= "ProfilePic='" . $profile_pic['ProfilePic'] . "' ";
-    $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
-    $sql .= "LIMIT 1";	
+	$profile_pic['ImageID'] = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
+	$sql = "INSERT INTO users.images";
+	$sql .= "(ImageID, ImageName) ";
+	$sql .= "VALUES (";
+	$sql .= "'" . $profile_pic['ImageID'] . "',";
+	$sql .= "'" . $profile_pic['ImageName'] . "'";
+	$sql .= ")";
 	$result = mysqli_query($db, $sql);
-  //if ($result){	
-  //  redirect_to(url_for('/users/profile/profile.php'));
-  //}else {
-    // UPDATE failed
-    //echo mysqli_error($db);
-  //}
+	if (!$result){		
+		echo mysqli_error($db);
+	}
 
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -111,8 +109,9 @@ if (is_post_request()){
   <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
     <?php if ($_SESSION['type'] == 'student'){ ?>
     <table>
-	  <p>"<?php echo $profile_pic['ProfilePic'] ?>" </p> 
-	  <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
+	  <?php $savedEvent = mysqli_fetch_assoc($savedEvents_set
+	  <p>"<?php echo $image['ImageID'] ?>" </p> 
+	  <img style="width:200px;height:170px;" src="<?php echo $image['ImageID'] ?>" alt="image" />
 
 	  <th>Your Saved Events</th>
       <tr>
