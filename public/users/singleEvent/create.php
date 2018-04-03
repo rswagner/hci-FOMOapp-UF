@@ -137,9 +137,11 @@ if (is_post_request()){
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-<form action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post">
+<form action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post" enctype="multipart/form-data">
   Event Name:<br/>
   <input type="text" name="eventName"/><br/>
+  Select Event Picture:<br/>
+  <input type="file" name= "fileToUpload" id="fileToUpload"><br/>
   Location:<br/>
   <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" /><br/>
   <input type="hidden" id="cityLat" name="lat" />
