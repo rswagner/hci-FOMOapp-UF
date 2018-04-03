@@ -1,0 +1,24 @@
+h2,h3,h4,p{
+  font-weight: 200;
+}
+h2{
+  color: #d84315;
+  border-bottom: 2px;
+  font-size: 6em;
+}
+h3{
+  color: #084b81;
+}
+h4{
+  color: #d84315;
+  font-size: 2em;
+}
+p{
+  font-size: 1.5em;
+}
+.btn{
+  background-color: #d84315;
+}
+.btn:hover{
+  background-color: #ff7543;
+}

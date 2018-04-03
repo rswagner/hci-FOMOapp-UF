@@ -1,10 +1,3 @@
-html, body {
-  background-color: #fff;
-  font-family: "Roboto";
-  width: 100%;
-  height:100%;
-  overflow: hidden;
-}
 #events-content,#rec-content,#dir-content,#gator-times-content{
   background-color: #fff;
   height: 70%;
@@ -53,10 +46,6 @@ h3{
   width: 95% ;
 }
 
-nav ul a{
-  padding: 15px 15px 15px 15px;
-}
-
 .tabs .tab a{
   color: #084b81;
   background-color: #fff;
@@ -84,8 +73,9 @@ h1 a{
   float: right;
   right: 3em;
 }
-
-
+nav ul a{
+  padding: 15px 15px 15px 15px;
+}
 footer {
   position: fixed;
   width: 100%;

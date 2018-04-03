@@ -28,6 +28,21 @@ if(!isset($_GET['id'])) {
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
+<head>
+    <meta charset="utf-8">
+    <title>Single Event View</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/singleEvent.css">
+</head>
+
   <script type="text/javascript">
     $(document).ready(function() {
       <?php if ($saved_event){ ?>
@@ -63,6 +78,7 @@ if(!isset($_GET['id'])) {
     });
   </script>
 
+
   <div>
     <h2><?php echo $event['EventName']; ?></h2>
     <h3>By <?php echo  $event['OrganizationName']?></h3>
@@ -87,7 +103,8 @@ if(!isset($_GET['id'])) {
       <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>">Update</a>
       <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
     <?php }else { ?>
-      <button type="button" id="saveEvent"></button>
+      <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
+      <!-- <button type="button" id="saveEvent"></button> -->
     <?php }?>
   </div>
 </html>
