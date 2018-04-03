@@ -101,43 +101,47 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 <?php include(SHARED_PATH . '/user_header.php'); ?>
   <body>
-  <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
-  <?php if ($info['ProfilePic']){ ?>
-     <img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >
-  <?php } ?>
-    <?php if ($_SESSION['type'] == 'student'){ ?>
-    <table>
-	  <th>Your Saved Events</th>
-      <tr>
-        <th>Name</th>
-        <th>&nbsp;</th>
-      </tr>
-      <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
-      <tr>
-        <td><?php echo $savedEvent['EventName'] ?></td>
-        <!-- Dynamically go through a for loop and echo the id in the url! -->
-        <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
-      </tr>
-    <?php } ?>
-    </table>
-    <?php
-      mysqli_free_result($savedEvents_set);
-    ?>
-    <h3>My Tags</h3>
-    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
-    <ul>
-      <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
-      <li> <?php echo $userTag['TagName']; ?> </li>
-      <?php }?>
-    </ul>
-  <?php }else { ?>
-    <h3>Description</h3>
-    <p><?php echo $info['OrganizationDescription']; ?></p>
-  <?php } ?>
+    <div class="content-box">
+      <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
+      <?php if ($info['ProfilePic']){ ?>
+         <img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >
+      <?php } ?>
+        <?php if ($_SESSION['type'] == 'student'){ ?>
+        <table>
+        <th>Your Saved Events</th>
+          <tr>
+            <th>Name</th>
+            <th>&nbsp;</th>
+          </tr>
+          <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
+          <tr>
+            <td><?php echo $savedEvent['EventName'] ?></td>
+            <!-- Dynamically go through a for loop and echo the id in the url! -->
+            <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
+          </tr>
+        <?php } ?>
+        </table>
+        <?php
+          mysqli_free_result($savedEvents_set);
+        ?>
+        <h3>My Tags</h3>
+        <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
+        <ul>
+          <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
+          <li> <?php echo $userTag['TagName']; ?> </li>
+          <?php }?>
+        </ul>
+      <?php }else { ?>
+        <h3>Description</h3>
+        <p><?php echo $info['OrganizationDescription']; ?></p>
+      <?php } ?>
 
-  <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
-      <input type="file" name= "fileToUpload" id="fileToUpload">
-      <input type="submit" value="Change Profile Image" name="submit">
-  </form>
+      <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
+          <input type="file" name= "fileToUpload" id="fileToUpload">
+          <input type="submit" value="Change Profile Image" name="submit">
+      </form>
+
+    </div>
+
   </body>
 </html>

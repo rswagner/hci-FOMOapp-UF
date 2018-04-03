@@ -45,7 +45,6 @@ h3{
   left: 2em;
   width: 95% ;
 }
-
 .tabs .tab a{
   color: #084b81;
   background-color: #fff;
@@ -63,26 +62,10 @@ h3{
 .tabs .indicator{
   background-color: #db662c;
 }
-.carousel{
-  height: 90% !important;
-}
-.carousel .carousel-item {
-  width: 100%;
-}
 h1 a{
   float: right;
   right: 3em;
 }
-footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  height: 50px;
-  background: #084b81;
-  border-top: 4px solid #db662c;
-  z-index: 10;
-}
-#eventsData img{
 
+#eventsData img{
 }

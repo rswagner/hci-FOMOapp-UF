@@ -69,34 +69,76 @@ if(!isset($_GET['id'])) {
       });
     });
   </script>
-
-
-  <div>
-    <h2><?php echo $event['EventName']; ?></h2>
-    <h3>By <?php echo  $event['OrganizationName']?></h3>
+  <div class="content-box">
     <?php if ($event['EventPic']){ ?>
-       <img style="width:200px;height:170px;" src="<?php echo $event['EventPic'] ?>" alt="image" >
+        <img class="event-banner-pic" src="<?php echo $event['EventPic'] ?>" alt="image"/>
     <?php } ?>
-    <h4><?php echo $event['Location']; ?></h4>
-    <h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4>
-    <h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?> - <?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4>
-    <p><?php echo $event['Description']; ?></p>
-    <h3>Event Tags</h3>
-    <?php if ($_SESSION['type'] == 'org'){?>
-      <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>">Edit Tags</a>
-    <?php } ?>
-    <ul>
-      <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>
-      <li> <?php echo $eventTag['TagName']; ?> </li>
-      <?php }
-      mysqli_free_result($eventTags_set);?>
-    </ul>
-    <?php if ($_SESSION['type'] == 'org'){?>
-      <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>">Update</a>
-      <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
-    <?php }else { ?>
-      <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
-      <!-- <button type="button" id="saveEvent"></button> -->
-    <?php }?>
+    <div class="event-info">
+      <div class="title">
+        <h2><?php echo $event['EventName'];?></h2>
+        <?php if ($_SESSION['type'] == 'org'){?>
+          <div class="admin-commands">
+            <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>" title="Edit Event" ><i class="medium material-icons">edit</i>Edit Event</a>
+            <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" title="Delete Event" onclick="return confirm('Are you sure you want to delete this event?')"><i class="medium material-icons">delete</i>Delete Event</a>
+          </div>
+        <?php }?>
+
+      </div>
+
+          <h3>By <?php echo  $event['OrganizationName'];?></h3>
+          <h4><?php echo $event['Location']; ?></h4>
+          <h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4>
+          <h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?> - <?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4>
+
+
+
+
+
+          <?php if ($_SESSION['type'] == 'student'){?>
+            <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
+
+
+          <?php }?>
+
+
+
+          <div class="description">
+            <h3>Description</h3>
+            <p><?php echo $event['Description']; ?></p>
+          </div>
+
+
+          <div class="tags">
+            <h3>Event Tags</h3>
+            <?php if ($_SESSION['type'] == 'org'){?>
+              <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags" ><i class="medium material-icons">edit</i>Edit Tags</a>
+            <?php } ?>
+            <ul>
+              <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>
+              <li> <?php echo $eventTag['TagName']; ?> <i class="material-icons">grade</i></li>
+              <?php }
+              mysqli_free_result($eventTags_set);?>
+            </ul>
+          </div>
+    </div>
+
   </div>
+
+    <footer>
+        <div class="footer-bar">
+            <center>
+                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="<?=WWW_ROOT?>/images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
+            </center>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
 </html>
