@@ -50,7 +50,7 @@ if(is_post_request()) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../../client/assets/CSS/login.css">
     <div class="login-box">
         <h1 class='login-title'><a href="#">FOMO@UF</a></h1>
         <div class="login-errors">

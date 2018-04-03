@@ -88,6 +88,7 @@ if ($_SESSION['type'] == "student"){
         <div class="right-side-gator">
         </div>
     </div>
+    ../javascript/main.js
     <footer>
         <div class="footer-bar">
             <center>

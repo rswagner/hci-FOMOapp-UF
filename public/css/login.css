@@ -1,0 +1,63 @@
+ html, body {
+     background-color: #fff;
+     font-family: "Roboto";
+     width: 100%;
+     height:100%;
+     overflow: auto;
+}
+ h1{
+     font-weight:200;
+}
+ .login-errors{
+     text-align: center;
+     color: red;
+}
+ .login-title h1, a{
+     font-size: 1.5em;
+     color: #084b81;
+     text-align: center;
+}
+ .login-content h1{
+     font-size:2em;
+     color:#DB662C;
+}
+ .login-box{
+     position: absolute;
+     height:40%;
+     width:40%;
+     left:32%;
+}
+ .button.login {
+     position: relative;
+     float:right;
+     align-content: center;
+     width: 30%;
+}
+ .button.login button, .button button {
+     width: 100%;
+     line-height: 64px;
+     font-weight: 900;
+     font-size: 18px;
+     background-color: transparent;
+     border: 3px solid rgba(0, 0, 0, 0.1);
+     color: rgba(0, 0, 0, 0.2);
+}
+ .button.login button:hover {
+     color: #084B81;
+     border-color: #DB662C;
+}
+ .pass-forgot {
+     width: 100%;
+     margin-top: .5em;
+     float: left;
+     text-align: center;
+     color: rgba(0, 0, 0, 0.4);
+     font-size: 18px;
+}
+ [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after{
+     background-color: #084B81;
+}
+ [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after{
+     border-color: #084B81;
+}
+
