@@ -1,0 +1,16 @@
+.btn{
+  background-color: #db662c;
+}
+.btn:hover{
+  background-color: #ff7543;
+}
+h1{
+  font-weight: 200;
+  color: #084b81;
+}
+.page-content{
+  margin-top: 2%;
+}
+.dateLocationfix{
+  margin-top: 100em;
+}

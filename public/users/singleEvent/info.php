@@ -28,14 +28,12 @@ if(!isset($_GET['id'])) {
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
-<head>
-    <meta charset="utf-8">
-    <title>Single Event View</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/info.css">
-</head>
+<title>Info view</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="<?=WWW_ROOT?>/css/info.css">
 
-  <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
       <?php if ($saved_event){ ?>
         $("#saveEvent").html("Unsave Event")
@@ -68,77 +66,71 @@ if(!isset($_GET['id'])) {
         }
       });
     });
-  </script>
-  <div class="content-box">
+</script>
+<div class="content-box">
     <?php if ($event['EventPic']){ ?>
-        <img class="event-banner-pic" src="<?php echo $event['EventPic'] ?>" alt="image"/>
+    <img class="event-banner-pic" src="<?php echo $event['EventPic'] ?>" alt="image" />
     <?php } ?>
     <div class="event-info">
-      <div class="title">
-        <h2><?php echo $event['EventName'];?></h2>
-        <?php if ($_SESSION['type'] == 'org'){?>
-          <div class="admin-commands">
-            <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>" title="Edit Event" ><i class="medium material-icons">edit</i>Edit Event</a>
-            <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" title="Delete Event" onclick="return confirm('Are you sure you want to delete this event?')"><i class="medium material-icons">delete</i>Delete Event</a>
-          </div>
+        <div class="title">
+            <h2>
+                <?php echo $event['EventName'];?>
+            </h2>
+            <?php if ($_SESSION['type'] == 'org'){?>
+            <div class="admin-commands">
+                <a href="<?php echo url_for('/users/singleEvent/update.php?id=' . $event['EventID']);?>" title="Edit Event"><i class="medium material-icons">edit</i>Edit Event</a>
+                <a href="<?php echo url_for('/users/singleEvent/delete.php?id=' . $event['EventID']);?>" title="Delete Event" onclick="return confirm('Are you sure you want to delete this event?')"><i class="medium material-icons">delete</i>Delete Event</a>
+            </div>
+            <?php }?>
+        </div>
+
+        <h3>By
+            <?php echo  $event['OrganizationName'];?>
+        </h3>
+        <h4>
+            <?php echo $event['Location']; ?>
+        </h4>
+        <h4>
+            <?php echo date('m/d/Y', strtotime($event['Date'])); ?>
+        </h4>
+        <h4>
+            <?php echo date('h:i a', strtotime($event['StartTime'])); ?> -
+            <?php echo date('h:i a', strtotime($event['EndTime'])); ?>
+        </h4>
+
+        <?php if ($_SESSION['type'] == 'student'){?>
+        <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
         <?php }?>
 
-      </div>
-
-          <h3>By <?php echo  $event['OrganizationName'];?></h3>
-          <h4><?php echo $event['Location']; ?></h4>
-          <h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4>
-          <h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?> - <?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4>
-
-
-
-
-
-          <?php if ($_SESSION['type'] == 'student'){?>
-            <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
-
-
-          <?php }?>
-
-
-
-          <div class="description">
+        <div class="description">
             <h3>Description</h3>
-            <p><?php echo $event['Description']; ?></p>
-          </div>
+            <p>
+                <?php echo $event['Description']; ?>
+            </p>
+        </div>
 
-
-          <div class="tags">
+        <div class="tags">
             <h3>Event Tags</h3>
             <?php if ($_SESSION['type'] == 'org'){?>
-              <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags" ><i class="medium material-icons">edit</i>Edit Tags</a>
+            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags"><i class="medium material-icons">edit</i>Edit Tags</a>
             <?php } ?>
             <ul>
-              <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>
-              <li> <?php echo $eventTag['TagName']; ?> <i class="material-icons">grade</i></li>
-              <?php }
+                <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>
+                <li>
+                    <?php echo $eventTag['TagName']; ?> <i class="material-icons">grade</i></li>
+                <?php }
               mysqli_free_result($eventTags_set);?>
             </ul>
-          </div>
+        </div>
     </div>
 
-  </div>
-
-    <footer>
-        <div class="footer-bar">
-            <center>
-                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="<?=WWW_ROOT?>/images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
-            </center>
-        </div>
-    </footer>
-
-
-
-
-
-
-
-
-
+</div>
+<footer>
+    <div class="footer-bar">
+        <center>
+            <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="<?=WWW_ROOT?>/images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
+        </center>
+    </div>
+</footer>
 
 </html>

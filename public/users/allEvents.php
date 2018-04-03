@@ -39,62 +39,57 @@ if ($_SESSION['type'] == "student"){
       });
 </script>
 
-<head>
-    <meta charset="utf-8">
-    <title>FOMO UF APP</title>
-    <link rel="stylesheet" href="../css/allEvents.css">
-    <script type="text/javascript" src="../javascript/allEvents.js"></script>
-</head>
+<title>All Events View</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="<?=WWW_ROOT?>/css/allEvents.css">
 
 <body>
     <?php if ($_SESSION['type'] == 'org'){?>
-  <div id="events-content" class="col s12 ">
-    <h1>MY HOST EVENTS<a class="btn-floating btn-large waves-effect waves-light orange" href="<?php echo url_for('/users/singleEvent/create.php');?>"><i class="material-icons">add</i></a></h1>
-      <div id="eventsData">
-      </div>
-  </div>
-<?php }else{?>
-  <div class="row">
-      <div class="col s12">
-          <ul class="tabs">
-              <li class="tab col s3"><a class="active" href="#events-content">Events</a></li>
-              <li class="tab col s3"><a href="#rec-content">Recommended</a></li>
-              <li class="tab col s3"><a href="#dir-content">Directory</a></li>
-              <li class="tab col s1"><a href="#map">Map</a></li>
-              <li class="tab col s2"><a href="#gator-times-content">Gator Times</a></li>
-          </ul>
-      </div>
-  </div>
-  <div id="events-content" class="col s12 ">
-      <div id="eventsData">
-      </div>
-  </div>
-  <div id="rec-content" class="col s12">
-      <div id="recEventsData">
-      </div>
-  </div>
-  <div id="map" class="col s12">
-      <div id="mapData">
-		  <iframe height="100%" width="100%" src="map.php" style="border:none; margin-top:-5px;" name="target"></iframe>
-		  <p> test </p>
-      </div>
-  </div>
-  <div id="gator-times-content" class="col s12">
-      <div class="left-side-gator">
-          <h1>Gator News!</h1>
-          <img class="gator-logo" src="../images/gator.png" alt="Gator-logo">
-      </div>
-      <div class="right-side-gator">
-      </div>
-  </div>
-  <div id="map" class="col s12">
-      <div>
-      </div>
-  </div>
-<?php }?>
-  </div>
-
-
+    <div id="events-content" class="col s12 ">
+        <h1>MY HOST EVENTS<a class="btn-floating btn-large waves-effect waves-light orange" href="<?php echo url_for('/users/singleEvent/create.php');?>"><i class="material-icons">add</i></a></h1>
+        <div id="eventsData">
+        </div>
+    </div>
+    <?php }else{?>
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#events-content">Events</a></li>
+                <li class="tab col s3"><a href="#rec-content">Recommended</a></li>
+                <li class="tab col s3"><a href="#dir-content">Directory</a></li>
+                <li class="tab col s1"><a href="#map">Map</a></li>
+                <li class="tab col s2"><a href="#gator-times-content">Gator Times</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="events-content" class="col s12 ">
+        <div id="eventsData">
+        </div>
+    </div>
+    <div id="rec-content" class="col s12">
+        <div id="recEventsData">
+        </div>
+    </div>
+    <div id="map" class="col s12">
+        <div id="mapData">
+            <iframe height="100%" width="100%" src="map.php" style="border:none; margin-top:-5px;" name="target"></iframe>
+            <p> test </p>
+        </div>
+    </div>
+    <div id="gator-times-content" class="col s12">
+        <div class="left-side-gator">
+            <h1>Gator News!</h1>
+            <img class="gator-logo" src="../images/gator.png" alt="Gator-logo">
+        </div>
+        <div class="right-side-gator">
+        </div>
+    </div>
+    <div id="map" class="col s12">
+        <div>
+        </div>
+    </div>
+    <?php }?>
     <footer>
         <div class="footer-bar">
             <center>
