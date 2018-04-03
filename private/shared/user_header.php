@@ -18,14 +18,14 @@ if (!isset($page_title)) $page_title = 'User Area'
     <!--Custom imports !-->
     <link rel="stylesheet" href="<?=WWW_ROOT?>/css/main.css">
     <link rel="stylesheet" href="<?=WWW_ROOT?>/css/navbar.css">
-
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/user_header.css">
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <body>
   <div class="nav-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a href="index.html" class="brand-logo"><img src="<?=WWW_ROOT?>/images/uf.png" alt="UF"></a>
+          <a href="<?php echo url_for('/users/allEvents.php');?>" class="brand-logo"><img src="<?=WWW_ROOT?>/images/uf.png" alt="UF"></a>
           <h1>FOMO@UF </h1>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">

@@ -30,7 +30,7 @@ h3{
   color: #db662c;
 }
 .gator-logo{
-  position: fixed;
+  position: absolute;
   float:left;
   height: 5em;
   padding: 0;
@@ -69,6 +69,10 @@ nav ul a{
 .carousel .carousel-item {
   width: 100%;
 }
+h1 a{
+  float: right;
+  right: 3em;
+}
 footer {
   position: fixed;
   width: 100%;
@@ -78,4 +82,7 @@ footer {
   background: #084b81;
   border-top: 4px solid #db662c;
   z-index: 10;
+}
+#eventsData img{
+
 }

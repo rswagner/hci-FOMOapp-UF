@@ -1,0 +1,143 @@
+<?php require_once('../../../private/initialize.php'); ?>
+
+<?php $page_title = 'Edit Tags';
+
+  if (is_post_request()){
+    $sql = "DELETE FROM users.UserTags WHERE StudentID = '" . $_SESSION['id'] . "'";
+    $result = mysqli_query($db, $sql);
+
+    if ($result){
+      foreach($_POST['checkTagList'] as $checkTagID) {
+        $sql = "INSERT INTO users.UserTags";
+        $sql .= "(TagID, StudentID) ";
+        $sql .= "VALUES (";
+        $sql .= "'" . $checkTagID . "',";
+        $sql .= "'" . $_SESSION['id'] . "'";
+        $sql .= ")";
+        $result = mysqli_query($db, $sql);
+
+      }
+      redirect_to(url_for('/users/profile/profile.php'));
+
+    } else {
+      // UPDATE failed
+      echo mysqli_error($db);
+    }
+
+  }
+
+  $sql = "SELECT * FROM users.Tags Order by users.Tags.TagName";
+  $allTags_set = mysqli_query($db, $sql);
+
+?>
+<?php include(SHARED_PATH . '/user_header.php'); ?>
+<head>
+    <meta charset="utf-8">
+    <title>FOMO UF APP</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Custom imports !-->
+    <link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/pretty-checkbox.css">
+	<link rel="stylesheet" href="../css/pretty-checkbox.min.css">
+    <script type="text/javascript" src="../javascript/main.js"></script>
+<style>
+table {
+    font-family: "Roboto", sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+	border: 1px; 
+	border-style: inset;
+    text-align: left;
+    padding: 6px;
+}
+
+tr:nth-child(even) {
+	color:black; 
+    background-color: #89B2D6
+}
+tr:nth-child(odd) {
+    background-color: #FFBB6F;
+}
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
+label { 
+  -webkit-appearance: push-button;
+  -moz-appearance: button; 
+  display: inline-block;
+  margin: 60px 0 10px 0;
+  cursor: pointer;
+}
+
+/* Default State */
+div2 {
+   background: green;
+   width: 400px;
+   height: 100px;
+   line-height: 100px;
+   color: white;
+   text-align: center;
+}
+
+/* Toggled State */
+input[type=checkbox]:checked ~ div {
+   background: red;
+}
+</style>
+</head>
+<label for="toggle-1">I'm a toggle</label>
+<input type="checkbox" id="toggle-1">
+<div>I'm controlled by toggle. No JavaScript!</div>
+	
+<form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
+
+    <table style="border:5px; padding: 6px; margin-top:2em; font-family: 'Roboto', sans-serif; width:80%;" align="center">
+	  <col width="30%">
+	  <tr style= "color:#ffffff; background-color: #004d99;">
+		<th style="width:20%">Name</th>
+		<th style="width:20%">Add Tag</th>
+		<th style="width:20%">Name</th>
+		<th style="width:20%">Add Tag</th>
+	  </tr>
+	</table> 
+  <?php while ($tag = mysqli_fetch_assoc($allTags_set)){?>
+    <table style="width:80%; font-family: 'Roboto', sans-serif; " align="center">
+	<col width="30%">
+	  <tr >
+		<td style="width:20%"></td>
+		<td style="width:20%"></td>
+		<td style="width:20%"></td>
+		<td style="width:20%"></td>
+	  </tr>
+	  <tr >
+		<!--<th><input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>"><?php echo $tag['TagName']?><br> </th> -->
+		<td style="padding-left:11px;">   <?php echo $tag['TagName']?> </td>		
+		<td><a style="margin-left:5em;" class="btn btn-small waves-effect waves-light blue" href=""> <i class="material-icons">add</i></a> </td>
+		<?php $tag = mysqli_fetch_assoc($allTags_set)?>
+		<td style="padding-left:18px;"><?php echo $tag['TagName']?> </td>		
+		<th>
+		<input id="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" >  
+		</th>	  
+	  </tr>
+  </table> 
+
+  <?php } 
+  mysqli_free_result($allTags_set);?>		
+  <input type="submit" value="Submit">
+</form>

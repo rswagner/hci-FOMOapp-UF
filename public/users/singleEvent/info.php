@@ -28,6 +28,12 @@ if(!isset($_GET['id'])) {
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
 
+<head>
+    <meta charset="utf-8">
+    <title>Single Event View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/info.css">
+</head>
   <script type="text/javascript">
     $(document).ready(function() {
       <?php if ($saved_event){ ?>

@@ -29,8 +29,6 @@ else {
   $organizationInfo = mysqli_fetch_assoc($organizationInfo_set);
   mysqli_free_result($organizationInfo_set);
 }
-
-
 // Get picture from database
 
 
