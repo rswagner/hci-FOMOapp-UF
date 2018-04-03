@@ -20,9 +20,10 @@
   }
 
 ?>
+<?php include(SHARED_PATH . '/user_header.php'); ?>
   </head>
   <body>
-    <div id="map" style="height: 720px; width: 1280px; margin: auto;"></div>
+    <div id="map" style="height: 500px; width: 600px; margin: auto;"></div>
   </body>
   <script>
     var eventDetails = <?php echo json_encode($eventCoors); ?>;
