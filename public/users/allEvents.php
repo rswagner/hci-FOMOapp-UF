@@ -23,7 +23,7 @@ if ($_SESSION['type'] == "student"){
     $(document).ready(function() {
         var allEventsText = "<div class='col s12 m7'>";
         <?php while($event = mysqli_fetch_assoc($event_set)){ ?>
-        allEventsText += "<div class='card horizontal'> <div class='card-image'> <img src='<?php echo substr($event['EventPic'],3) ?>'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
+        allEventsText += "<div class='card horizontal'><div class='card-image'> <img src='<?php echo substr($event['EventPic'],3) ?>'> </div> <div class='card-stacked'><div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
         <?php }
         mysqli_free_result($event_set); ?>
         $("#eventsData").html(allEventsText);
@@ -51,16 +51,14 @@ if ($_SESSION['type'] == "student"){
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Custom imports !-->
-    <link rel="stylesheet" href="../css/main.css">
-    <script type="text/javascript" src="../javascript/main.js"></script>
+    <link rel="stylesheet" href="../css/allEvents.css">
+    <script type="text/javascript" src="../javascript/allEvents.js"></script>
 </head>
 
 <body>
     <?php if ($_SESSION['type'] == 'org'){?>
   <div id="events-content" class="col s12 ">
-
     <h1>MY HOST EVENTS<a class="btn-floating btn-large waves-effect waves-light orange" href="<?php echo url_for('/users/singleEvent/create.php');?>"><i class="material-icons">add</i></a></h1>
-
       <div id="eventsData">
       </div>
   </div>
