@@ -71,7 +71,8 @@ if ($_SESSION['type'] == "student"){
               <li class="tab col s3"><a class="active" href="#events-content">Events</a></li>
               <li class="tab col s3"><a href="#rec-content">Recommended</a></li>
               <li class="tab col s3"><a href="#dir-content">Directory</a></li>
-              <li class="tab col s3"><a href="#gator-times-content">Gator Times</a></li>
+              <li class="tab col s1"><a href="#map">Map</a></li>
+              <li class="tab col s2"><a href="#gator-times-content">Gator Times</a></li>
           </ul>
       </div>
   </div>
@@ -89,6 +90,13 @@ if ($_SESSION['type'] == "student"){
           <img class="gator-logo" src="../images/gator.png" alt="Gator-logo">
       </div>
       <div class="right-side-gator">
+      </div>
+  </div>
+  <div id="map" class="col s12">
+      <div>
+
+
+
       </div>
   </div>
 <?php }?>

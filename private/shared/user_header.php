@@ -15,16 +15,14 @@ if (!isset($page_title)) $page_title = 'User Area'
      <!--Let browser know website is optimized for mobile-->
      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Custom imports !-->
-    <link rel="stylesheet" href="../../public/css/main.css">
-    <link rel="stylesheet" href="../../public/css/navbar.css">
-
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/navbar.css">
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <body>
   <div class="nav-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a href="index.html" class="brand-logo"><img src="../../public/images/uf.png" alt="UF"></a>
+          <a href="index.html" class="brand-logo"><img src="<?=WWW_ROOT?>/images/uf.png" alt="UF"></a>
           <h1>FOMO@UF </h1>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
@@ -40,4 +38,3 @@ if (!isset($page_title)) $page_title = 'User Area'
         </div>
       </nav>
     </div>
-
