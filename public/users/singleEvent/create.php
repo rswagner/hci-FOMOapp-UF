@@ -4,76 +4,117 @@
 <?php $page_title = 'Create New Event';
 
 if (is_post_request()){
-  $target_dir = "../profile/uploads/";
-  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    // Check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
-    // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 5000000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-          $event['EventName'] = $_POST['eventName'] ?? '';
-          $event['Location'] = $_POST['location'] ?? '';
-          $event['Date'] = $_POST['date'] ?? '';
-          $event['StartTime'] = $_POST['startTime'] ?? '';
-          $event['EndTime'] = $_POST['endTime'] ?? '';
-          $event['Description'] = $_POST['description'] ?? '';
-          $event['OrganizationID'] = $_SESSION['id'] ?? '';
-          $event['Latitude'] = $_POST['lat'] ?? '';
-          $event['Longitude'] = $_POST['long'] ?? '';
-          $event['EventPic'] = $target_file;
-
-          $sql = "INSERT INTO users.Events";
-          $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude, EventPic) ";
-          $sql .= "VALUES (";
-          $sql .= "'" . $event['OrganizationID'] . "',";
-          $sql .= "'" . $event['Location'] . "',";
-          $sql .= "'" . $event['Date'] . "',";
-          $sql .= "'" . $event['StartTime'] . "',";
-          $sql .= "'" . $event['EndTime'] . "',";
-          $sql .= "'" . $event['Description'] . "',";
-          $sql .= "'" . $event['EventName'] . "',";
-          $sql .= "'" . $event['Longitude'] . "',";
-          $sql .= "'" . $event['Latitude'] . "',";
-          $sql .= "'" . $event['EventPic'] . "'";
-          $sql .= ")";
-          $result = mysqli_query($db, $sql);
-
-          if ($result){
-            redirect_to(url_for('/users/allEvents.php'));
-          }else {
-            // UPDATE failed
-            echo mysqli_error($db);
+  if ($_FILES["fileToUpload"]["name"]){
+    $target_dir = "../profile/uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      // Check if image file is a actual image or fake image
+      if(isset($_POST["submit"])) {
+          $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+          if($check !== false) {
+              $uploadOk = 1;
+          } else {
+              $uploadOk = 0;
+              $message = "File is not an image.";
+              echo "<script type='text/javascript'>alert('$message');</script>";
           }
-        } else {
-            echo "Sorry, there was an error uploading your file.";
       }
+      // Check if file already exists
+      if (file_exists($target_file)) {
+          $message = "Sorry, file already exists.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+          $uploadOk = 0;
+      }
+      // Check file size
+      if ($_FILES["fileToUpload"]["size"] > 5000000) {
+          $message = "Sorry, your file is too large.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+          $uploadOk = 0;
+      }
+      // Allow certain file formats
+      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+      && $imageFileType != "gif" ) {
+          $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+          $uploadOk = 0;
+      }
+      // Check if $uploadOk is set to 0 by an error
+      if ($uploadOk == 0) {
+          $message = "Sorry, your file was not uploaded.";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+      // if everything is ok, try to upload file
+      } else {
+          if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            $event['EventName'] = $_POST['eventName'] ?? '';
+            $event['Location'] = $_POST['location'] ?? '';
+            $event['Date'] = $_POST['date'] ?? '';
+            $event['StartTime'] = $_POST['startTime'] ?? '';
+            $event['EndTime'] = $_POST['endTime'] ?? '';
+            $event['Description'] = $_POST['description'] ?? '';
+            $event['OrganizationID'] = $_SESSION['id'] ?? '';
+            $event['Latitude'] = $_POST['lat'] ?? '';
+            $event['Longitude'] = $_POST['long'] ?? '';
+            $event['EventPic'] = $target_file;
+
+            $sql = "INSERT INTO users.Events";
+            $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude, EventPic) ";
+            $sql .= "VALUES (";
+            $sql .= "'" . $event['OrganizationID'] . "',";
+            $sql .= "'" . mysqli_real_escape_string($db, $event['Location']) . "',";
+            $sql .= "'" . $event['Date'] . "',";
+            $sql .= "'" . $event['StartTime'] . "',";
+            $sql .= "'" . $event['EndTime'] . "',";
+            $sql .= "'" . mysqli_real_escape_string($db, $event['Description']) . "',";
+            $sql .= "'" . mysqli_real_escape_string($db, $event['EventName']) . "',";
+            $sql .= "'" . $event['Longitude'] . "',";
+            $sql .= "'" . $event['Latitude'] . "',";
+            $sql .= "'" . $event['EventPic'] . "'";
+            $sql .= ")";
+            $result = mysqli_query($db, $sql);
+
+            if ($result){
+              redirect_to(url_for('/users/allEvents.php'));
+            }else {
+              // UPDATE failed
+              echo mysqli_error($db);
+            }
+          } else {
+              echo "Sorry, there was an error uploading your file.";
+      }
+    }
+  }else {
+    $event['EventName'] = $_POST['eventName'] ?? '';
+    $event['Location'] = $_POST['location'] ?? '';
+    $event['Date'] = $_POST['date'] ?? '';
+    $event['StartTime'] = $_POST['startTime'] ?? '';
+    $event['EndTime'] = $_POST['endTime'] ?? '';
+    $event['Description'] = $_POST['description'] ?? '';
+    $event['OrganizationID'] = $_SESSION['id'] ?? '';
+    $event['Latitude'] = $_POST['lat'] ?? '';
+    $event['Longitude'] = $_POST['long'] ?? '';
+
+    $sql = "INSERT INTO users.Events";
+    $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . $event['OrganizationID'] . "',";
+    $sql .= "'" . mysql_real_escape_string($event['Location']) . "',";
+    $sql .= "'" . $event['Date'] . "',";
+    $sql .= "'" . $event['StartTime'] . "',";
+    $sql .= "'" . $event['EndTime'] . "',";
+    $sql .= "'" . mysql_real_escape_string($event['Description']) . "',";
+    $sql .= "'" . mysql_real_escape_string($event['EventName']) . "',";
+    $sql .= "'" . $event['Longitude'] . "',";
+    $sql .= "'" . $event['Latitude'] . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+
+    if ($result){
+      redirect_to(url_for('/users/allEvents.php'));
+    }else {
+      // UPDATE failed
+      echo mysqli_error($db);
+    }
   }
 }
 

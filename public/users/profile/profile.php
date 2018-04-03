@@ -36,67 +36,77 @@ else {
 //readfile($content);
 
 if (is_post_request()){
-
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  // Check if image file is a actual image or fake image
-  if(isset($_POST["submit"])) {
-      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-      if($check !== false) {
-          echo "File is an image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-      } else {
-          echo "File is not an image.";
-          $uploadOk = 0;
-      }
-  }
-  // Check if file already exists
-  if (file_exists($target_file)) {
-      echo "Sorry, file already exists.";
-      $uploadOk = 0;
-  }
-  // Check file size
-  if ($_FILES["fileToUpload"]["size"] > 5000000) {
-      echo "Sorry, your file is too large.";
-      $uploadOk = 0;
-  }
-  // Allow certain file formats
-  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  && $imageFileType != "gif" ) {
-      echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-      $uploadOk = 0;
-  }
-  // Check if $uploadOk is set to 0 by an error
-  if ($uploadOk == 0) {
-      echo "Sorry, your file was not uploaded.";
-  // if everything is ok, try to upload file
-  } else {
-      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        if ($_SESSION['type'] == "student"){
-          $sql = "UPDATE users.Users SET ";
-        	$sql .= "ProfilePic='" . $target_file . "' ";
-          $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
-          $sql .= "LIMIT 1";
-        	$result = mysqli_query($db, $sql);
-        }else {
-          $sql = "UPDATE users.Organizations SET ";
-        	$sql .= "ProfilePic='" . $target_file . "' ";
-          $sql .= "WHERE OrganizationID='" . $_SESSION['id'] . "' ";
-          $sql .= "LIMIT 1";
-        	$result = mysqli_query($db, $sql);
+  if ($_FILES["fileToUpload"]["name"]){
+  $target_dir = "uploads/";
+  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+  $uploadOk = 1;
+  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+            $message = "File is not an image.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
         }
-        if ($result){
-          echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        }else {
-          echo mysqli_error($db);
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        $message = "Sorry, file already exists.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        $uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["fileToUpload"]["size"] > 5000000) {
+        $message = "Sorry, your file is too large.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        $message = "Sorry, your file was not uploaded.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+          if ($_SESSION['type'] == "student"){
+            $sql = "UPDATE users.Users SET ";
+          	$sql .= "ProfilePic='" . $target_file . "' ";
+            $sql .= "WHERE UserID='" . $_SESSION['id'] . "' ";
+            $sql .= "LIMIT 1";
+          	$result = mysqli_query($db, $sql);
+          }else {
+            $sql = "UPDATE users.Organizations SET ";
+          	$sql .= "ProfilePic='" . $target_file . "' ";
+            $sql .= "WHERE OrganizationID='" . $_SESSION['id'] . "' ";
+            $sql .= "LIMIT 1";
+          	$result = mysqli_query($db, $sql);
+          }
+          if ($result){
+            $message = 'The file '. basename( $_FILES['fileToUpload']['name']). ' has been uploaded.';
+            echo "<script type='text/javascript'>alert('$message');</script>";
+          }else {
+            echo mysqli_error($db);
+          }
+        } else {
+            $message = "Sorry, there was an error uploading your file.";
+            echo "<script type='text/javascript'>alert('$message');</script>";
         }
-      } else {
-          echo "Sorry, there was an error uploading your file.";
       }
+    }else {
+      $message = "Sorry, you need to choose a file before uploading.";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+    }
   }
-}
 ?>
 
 <?php include(SHARED_PATH . '/user_header.php'); ?>
