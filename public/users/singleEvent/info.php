@@ -66,6 +66,9 @@ if(!isset($_GET['id'])) {
   <div>
     <h2><?php echo $event['EventName']; ?></h2>
     <h3>By <?php echo  $event['OrganizationName']?></h3>
+    <?php if ($event['EventPic']){ ?>
+       <img style="width:200px;height:170px;" src="<?php echo $event['EventPic'] ?>" alt="image" >
+    <?php } ?>
     <h4><?php echo $event['Location']; ?></h4>
     <h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4>
     <h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?> - <?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4>
