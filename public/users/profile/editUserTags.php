@@ -32,10 +32,9 @@
 ?>
 
 <form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
-  <?php while ($tag = mysqli_fetch_assoc($allTags_set))?>
+  <?php while ($tag = mysqli_fetch_assoc($allTags_set)){?>
         <input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>"><?php echo $tag['TagName']?><br>
-  <?php
-    }
+  <?php } 
   mysqli_free_result($allTags_set);?>
   <input type="submit" value="Submit">
 </form>
