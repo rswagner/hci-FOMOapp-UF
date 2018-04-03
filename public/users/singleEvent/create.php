@@ -14,19 +14,21 @@ if (is_post_request()){
   $event['OrganizationID'] = $_SESSION['id'] ?? '';
   $event['Latitude'] = $_POST['lat'] ?? '';
   $event['Longitude'] = $_POST['long'] ?? '';
-
+  $event['EventPic'] = 'uploads/default.jpg' ?? '';
+	
   $sql = "INSERT INTO users.Events";
   $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude) ";
   $sql .= "VALUES (";
   $sql .= "'" . $event['OrganizationID'] . "',";
-  $sql .= "'" . $event['Location'] . "',";
+  $sql .= "'" . $event['Location'] . "',";	
   $sql .= "'" . $event['Date'] . "',";
   $sql .= "'" . $event['StartTime'] . "',";
   $sql .= "'" . $event['EndTime'] . "',";
   $sql .= "'" . $event['Description'] . "',";
   $sql .= "'" . $event['EventName'] . "',";
   $sql .= "'" . $event['Longitude'] . "',";
-  $sql .= "'" . $event['Latitude'] . "'";
+  $sql .= "'" . $event['Latitude'] . "',";
+  $sql .= "'" . $event['EventPic'] . "'";
   $sql .= ")";
   $result = mysqli_query($db, $sql);
 
