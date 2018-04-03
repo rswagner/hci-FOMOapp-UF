@@ -23,14 +23,14 @@ if ($_SESSION['type'] == "student"){
     $(document).ready(function() {
         var allEventsText = "<div class='col s12 m7'>";
         <?php while($event = mysqli_fetch_assoc($event_set)){ ?>
-        allEventsText += "<div class='card horizontal'> <div class='card-image'> <img src='https://lorempixel.com/100/190/nature/6'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
+        allEventsText += "<div class='card horizontal'> <div class='card-image'> <img src='<?php echo substr($event['EventPic'],3) ?>'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
         <?php }
         mysqli_free_result($event_set); ?>
         $("#eventsData").html(allEventsText);
         <?php if ($_SESSION['type'] == "student"){?>
           var recommendText = "<div class='col s12 m7'>";
           <?php while($event = mysqli_fetch_assoc($recommendEvent_set)){ ?>
-          recommendText += "<div class='card horizontal'> <div class='card-image'> <img src='https://lorempixel.com/100/190/nature/6'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
+          recommendText += "<div class='card horizontal'> <div class='card-image'> <img src='<?php echo substr($event['EventPic'],3) ?>'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
           <?php }
           mysqli_free_result($recommendEvent_set); ?>
           $("#recEventsData").html(recommendText);
