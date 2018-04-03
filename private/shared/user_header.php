@@ -22,7 +22,7 @@ if (!isset($page_title)) $page_title = 'User Area'
   <div class="nav-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a href="index.html" class="brand-logo"><img src="<?=WWW_ROOT?>/images/uf.png" alt="UF"></a>
+          <a href="<?php echo url_for('/users/allEvents.php');?>" class="brand-logo"><img src="<?=WWW_ROOT?>/images/uf.png" alt="UF"></a>
           <h1>FOMO@UF </h1>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
