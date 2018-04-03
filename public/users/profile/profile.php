@@ -17,16 +17,16 @@ if ($_SESSION['type'] == "student"){
   $sql = "SELECT ProfilePic FROM users.Users WHERE ";
   $sql .= "UserID ='" . $_SESSION['id'] . "'";
   $image_set = mysqli_query($db, $sql);
-  $profile_pic = mysqli_fetch_assoc($image_set);
+  $info = mysqli_fetch_assoc($image_set);
    mysqli_free_result($image_set);
 }
 // org
 else {
-  $sql = "SELECT OrganizationDescription FROM users.Organizations WHERE ";
+  $sql = "SELECT ProfilePic, OrganizationDescription FROM users.Organizations WHERE ";
   $sql .= "OrganizationID = '" . $_SESSION['id'] . "'";
   $organizationInfo_set = mysqli_query($db, $sql);
 
-  $organizationInfo = mysqli_fetch_assoc($organizationInfo_set);
+  $info = mysqli_fetch_assoc($organizationInfo_set);
   mysqli_free_result($organizationInfo_set);
 }
 // Get picture from database
@@ -132,16 +132,14 @@ if (is_post_request()){
         <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
 
       <!-- when database works:   <img src="" alt="image" /> -->
-
+        <img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >
+        <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
+          <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple>
+          <label for="fileToUpload"><span>Choose File</span></label>
+          <input type="submit" id="submitForFileUpload" value="Upload Image" name="submit" class="inputFile">
+          <label for="submitForFileUpload">Upload Image</label>
+        </form>
         <?php if ($_SESSION['type'] == 'student'){ ?>
-        <!--<p>"<?php echo $profile_pic['ProfilePic'] ?>" </p>-->
-          <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
-          <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple>
-            <label for="fileToUpload"><span>Choose File</span></label>
-            <input type="submit" id="submitForFileUpload" value="Upload Image" name="submit" class="inputFile">
-            <label for="submitForFileUpload">Upload Image</label>
-          </form>
         <div class="card horizontal profile-events-card">
             <table>
               <th>Your Saved Events</th>
@@ -178,7 +176,7 @@ if (is_post_request()){
         </div>
       <?php }else { ?>
         <h3>Description</h3>
-        <p><?php echo $organizationInfo['OrganizationDescription']; ?></p>
+        <p><?php echo $info['OrganizationDescription']; ?></p>
       <?php } ?>
     </div>
 
