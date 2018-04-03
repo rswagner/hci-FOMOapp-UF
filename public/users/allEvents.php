@@ -93,8 +93,17 @@ if ($_SESSION['type'] == "student"){
   </div>
 <?php }?>
   </div>
+    <div id="dir-content" class="col s12 green">
+    </div>
 
-
+    <div id="gator-times-content" class="col s12">
+        <div class="left-side-gator">
+            <h1>Gator News!</h1>
+            <img class="gator-logo" src="../images/gator.png" alt="Gator-logo">
+        </div>
+        <div class="right-side-gator">
+        </div>
+    </div>
     <footer>
         <div class="footer-bar">
             <center>
@@ -105,3 +114,4 @@ if ($_SESSION['type'] == "student"){
 </body>
 
 </html>
+

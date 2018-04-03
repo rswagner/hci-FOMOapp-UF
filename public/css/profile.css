@@ -1,0 +1,143 @@
+.profile-container {
+    position: relative;
+    width: 80%;
+    left: 10em;
+}
+
+@media screen and (max-width:993px) {
+    .profile-container {
+        width: 95%;
+        left: 2em;
+    }
+}
+
+h1 {
+    color: #084b81;
+    font-weight: 200;
+}
+
+a {
+    color: #ffab40;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label, input[type="submit"] {
+    font: inherit;
+    color: white;
+    background-color: #084b81;
+    padding: 5px 15px;
+    box-shadow: 0px 4px #db662c;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+img {
+    display: block;
+    margin-bottom: 15px;
+}
+
+th {
+    color: #d84315;
+    margin: 0px;
+    font-size: 2.56rem;
+    font-weight: normal;
+    padding: 0px 0px 0px;
+}
+
+td {
+    color: #084b81;
+}
+
+.event-name-column-header {
+    color: #084b81;
+    margin: 0px;
+    font-size: 1.56rem;
+    font-weight: normal;
+    padding: 0px;
+}
+
+.profile-events-card {
+    padding: 15px 15px;
+    margin-top: 30px;
+}
+
+.tag {
+    font: inherit;
+    color: white;
+    background-color: #084b81;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+.tag-card {
+    position: static;
+    margin-bottom: 25px;
+}
+.tag-card .tag-card-content {
+    padding: 15px 15px;
+}
+.tag-card .tag-card-content h2 {
+    color: #d84315;
+    margin: 0px;
+    font-size: 2.56rem;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 55px;
+    background: #084b81;
+    border-top: 4px solid #db662c;
+    z-index: 10;
+}
+
+/*
+.inputfile:focus + label,
+.inputfile + label:hover {
+    box-shadow: 0 0 #db662c; background-color: #084b81;
+}
+*/
+
+/*
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    font: inherit;
+    border: 0;
+    padding: 10px 20px;   
+    text-align: center;
+    color: white;
+    display: inline-block;
+    background-color: #084b81;
+    cursor: pointer;
+}
+
+input, .btn {
+    position: relative;
+    border: 0;
+    padding: 10px 20px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    background-color: #084b81;
+}
+.custom-file-upload:focus, input:focus, .btn:active {
+    top: 4px;   
+}
+
+input, .btn.blue {box-shadow: 0px 4px #db662c;}
+input:active, .btn.blue:active {box-shadow: 0 0 #db662c; background-color: #084b81;}*/

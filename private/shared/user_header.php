@@ -1,6 +1,7 @@
 <?php
 if (!isset($page_title)) $page_title = 'User Area'
  ?>
+
 <html lang="en">
   <head>
     <title><?php echo $page_title;?></title>
@@ -15,6 +16,8 @@ if (!isset($page_title)) $page_title = 'User Area'
      <!--Let browser know website is optimized for mobile-->
      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Custom imports !-->
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/main.css">
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/navbar.css">
     <link rel="stylesheet" href="<?=WWW_ROOT?>/css/user_header.css">
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -38,3 +41,4 @@ if (!isset($page_title)) $page_title = 'User Area'
         </div>
       </nav>
     </div>
+

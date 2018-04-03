@@ -17,24 +17,24 @@ if ($_SESSION['type'] == "student"){
   $sql = "SELECT ProfilePic FROM users.Users WHERE ";
   $sql .= "UserID ='" . $_SESSION['id'] . "'";
   $image_set = mysqli_query($db, $sql);
-  $info = mysqli_fetch_assoc($image_set);
+  $profile_pic = mysqli_fetch_assoc($image_set);
    mysqli_free_result($image_set);
 }
 // org
 else {
-  $sql = "SELECT OrganizationDescription, ProfilePic FROM users.Organizations WHERE ";
+  $sql = "SELECT OrganizationDescription FROM users.Organizations WHERE ";
   $sql .= "OrganizationID = '" . $_SESSION['id'] . "'";
   $organizationInfo_set = mysqli_query($db, $sql);
 
-  $info = mysqli_fetch_assoc($organizationInfo_set);
+  $organizationInfo = mysqli_fetch_assoc($organizationInfo_set);
   mysqli_free_result($organizationInfo_set);
 }
 // Get picture from database
 
+
 //$row = mysqli_fetch_array($image_set);
 //$content = $row['https://s3.us-east-2.amazonaws.com/hci-fomo/logan.jpg'];
 //readfile($content);
-
 if (is_post_request()){
   if ($_FILES["fileToUpload"]["name"]){
   $target_dir = "uploads/";
@@ -110,44 +110,106 @@ if (is_post_request()){
 ?>
 
 <?php include(SHARED_PATH . '/user_header.php'); ?>
-  <body>
-  <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
-  <?php if ($info['ProfilePic']){ ?>
-     <img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >
-  <?php } ?>
-    <?php if ($_SESSION['type'] == 'student'){ ?>
-    <table>
-	  <th>Your Saved Events</th>
-      <tr>
-        <th>Name</th>
-        <th>&nbsp;</th>
-      </tr>
-      <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
-      <tr>
-        <td><?php echo $savedEvent['EventName'] ?></td>
-        <!-- Dynamically go through a for loop and echo the id in the url! -->
-        <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
-      </tr>
-    <?php } ?>
-    </table>
-    <?php
-      mysqli_free_result($savedEvents_set);
-    ?>
-    <h3>My Tags</h3>
-    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
-    <ul>
-      <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
-      <li> <?php echo $userTag['TagName']; ?> </li>
-      <?php }?>
-    </ul>
-  <?php }else { ?>
-    <h3>Description</h3>
-    <p><?php echo $info['OrganizationDescription']; ?></p>
-  <?php } ?>
 
-  <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
-      <input type="file" name= "fileToUpload" id="fileToUpload">
-      <input type="submit" value="Change Profile Image" name="submit">
-  </form>
+<head>
+    <meta charset="utf-8">
+    <title>FOMO UF APP</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Custom imports !-->
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/profile.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
+
+      <!-- when database works:   <img src="" alt="image" /> -->
+
+        <?php if ($_SESSION['type'] == 'student'){ ?>
+        <!--<p>"<?php echo $profile_pic['ProfilePic'] ?>" </p>-->
+          <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
+          <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple>
+            <label for="fileToUpload"><span>Choose File</span></label>
+            <input type="submit" id="submitForFileUpload" value="Upload Image" name="submit" class="inputFile">
+            <label for="submitForFileUpload">Upload Image</label>
+          </form>
+        <div class="card horizontal profile-events-card">
+            <table>
+              <th>Your Saved Events</th>
+              <tr>
+                <!--<th class="event-name-column-header">Name</th>
+                <th>&nbsp;</th>-->
+              </tr>
+              <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
+              <tr>
+                <td><?php echo $savedEvent['EventName'] ?></td>
+                <!-- Dynamically go through a for loop and echo the id in the url! -->
+                <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
+              </tr>
+            <?php } ?>
+            </table>
+        </div>
+        <?php
+          mysqli_free_result($savedEvents_set);
+        ?>
+        <div class="card horizontal tag-card">
+            <div class="card-stacked">
+                <div class="card-content tag-card-content">
+                    <h2>My Tags</h2>
+                    <ul>
+                      <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
+                      <li class="tag"> <?php echo $userTag['TagName']; ?> </li>
+                      <?php }?>
+                    </ul>
+                </div>
+                <div class="card-action">
+                    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
+                </div>
+            </div>
+        </div>
+      <?php }else { ?>
+        <h3>Description</h3>
+        <p><?php echo $organizationInfo['OrganizationDescription']; ?></p>
+      <?php } ?>
+    </div>
+
+    <footer>
+        <div class="footer-bar">
+            <center>
+                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="../../images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
+            </center>
+        </div>
+    </footer>
   </body>
 </html>
+
+<script>
+    var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input ) {
+        var label	 = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+        input.addEventListener( 'change', function( e )
+        {
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( '\\' ).pop();
+
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+    });
+</script>

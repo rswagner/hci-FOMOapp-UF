@@ -7,11 +7,10 @@ if(!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'] ;
-$sql = "SELECT * FROM users.Events WHERE EventID='" . db_espace($db,$id) . "'";
-$single_event_set = mysqli_query($db, $sql);
+if(is_get_request()) {
 
-$event = mysqli_fetch_assoc($single_event_set);
-mysqli_free_result($single_event_set);
+  $sql = "SELECT * FROM users.Events WHERE EventID='" . db_espace($db,$id) . "'";
+  $single_event_set = mysqli_query($db, $sql);
 
 if(is_post_request()) {
   if ($_FILES["fileToUpload"]["name"]){
@@ -145,11 +144,11 @@ if(is_post_request()) {
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-<form action="<?php echo url_for('/users/singleEvent/update.php?id=' . $id);?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo url_for('/users/singleEvent/update.php?id=' . $id);?>" method="post">
   Event Name:<br />
   <input type="text" name="eventName" value="<?php echo $event['EventName']; ?>" /><br/>
   Select Event Picture:<br/>
-  <input type="file" name= "fileToUpload" id="fileToUpload"><br/>
+  <input type="file" name= "fileToUpload" id="fileToUpload">
   Location:<br/>
   <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" placeholder="<?php echo $event['Location']?>"/><br/>
   <input type="hidden" id="cityLat" name="lat" />
@@ -163,7 +162,7 @@ if(is_post_request()) {
   <input type="time" name="endTime" value="<?php echo $event['EndTime']; ?>" /><br/>
   Description<br/>
   <textarea name="description" cols="40" rows="5"><?php echo $event['Description']; ?></textarea><br>
-  <input type="submit" name="submitForm" value="Submit"  />
+  <input type="submit" name="submit" value="Submit"  />
 </form>
 
 </html>
