@@ -27,6 +27,7 @@ html, body {
   padding-top: 0;
 }
 .nav-wrapper h1 {
+  color: white;
   position: absolute;
   font-weight: 200;
   padding-left: 2em;

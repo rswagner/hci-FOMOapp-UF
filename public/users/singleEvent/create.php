@@ -4,76 +4,39 @@
 <?php $page_title = 'Create New Event';
 
 if (is_post_request()){
-  $target_dir = "../profile/uploads/";
-  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    // Check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
-    // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 5000000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-          $event['EventName'] = $_POST['eventName'] ?? '';
-          $event['Location'] = $_POST['location'] ?? '';
-          $event['Date'] = $_POST['date'] ?? '';
-          $event['StartTime'] = $_POST['startTime'] ?? '';
-          $event['EndTime'] = $_POST['endTime'] ?? '';
-          $event['Description'] = $_POST['description'] ?? '';
-          $event['OrganizationID'] = $_SESSION['id'] ?? '';
-          $event['Latitude'] = $_POST['lat'] ?? '';
-          $event['Longitude'] = $_POST['long'] ?? '';
-          $event['EventPic'] = $target_file;
+  $event;
+  $event['EventName'] = $_POST['eventName'] ?? '';
+  $event['Location'] = $_POST['location'] ?? '';
+  $event['Date'] = $_POST['date'] ?? '';
+  $event['StartTime'] = $_POST['startTime'] ?? '';
+  $event['EndTime'] = $_POST['endTime'] ?? '';
+  $event['Description'] = $_POST['description'] ?? '';
+  $event['OrganizationID'] = $_SESSION['id'] ?? '';
+  $event['Latitude'] = $_POST['lat'] ?? '';
+  $event['Longitude'] = $_POST['long'] ?? '';
+  $event['EventPic'] = 'uploads/default.jpg' ?? '';
+	
+  $sql = "INSERT INTO users.Events";
+  $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $event['OrganizationID'] . "',";
+  $sql .= "'" . $event['Location'] . "',";	
+  $sql .= "'" . $event['Date'] . "',";
+  $sql .= "'" . $event['StartTime'] . "',";
+  $sql .= "'" . $event['EndTime'] . "',";
+  $sql .= "'" . $event['Description'] . "',";
+  $sql .= "'" . $event['EventName'] . "',";
+  $sql .= "'" . $event['Longitude'] . "',";
+  $sql .= "'" . $event['Latitude'] . "',";
+  $sql .= "'" . $event['EventPic'] . "'";
+  $sql .= ")";
+  $result = mysqli_query($db, $sql);
 
-          $sql = "INSERT INTO users.Events";
-          $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude, EventPic) ";
-          $sql .= "VALUES (";
-          $sql .= "'" . $event['OrganizationID'] . "',";
-          $sql .= "'" . $event['Location'] . "',";
-          $sql .= "'" . $event['Date'] . "',";
-          $sql .= "'" . $event['StartTime'] . "',";
-          $sql .= "'" . $event['EndTime'] . "',";
-          $sql .= "'" . $event['Description'] . "',";
-          $sql .= "'" . $event['EventName'] . "',";
-          $sql .= "'" . $event['Longitude'] . "',";
-          $sql .= "'" . $event['Latitude'] . "',";
-          $sql .= "'" . $event['EventPic'] . "'";
-          $sql .= ")";
-          $result = mysqli_query($db, $sql);
-
-          if ($result){
-            redirect_to(url_for('/users/allEvents.php'));
-          }else {
-            // UPDATE failed
-            echo mysqli_error($db);
-          }
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-      }
+  if ($result){
+    redirect_to(url_for('/users/allEvents.php'));
+  }else {
+    // UPDATE failed
+    echo mysqli_error($db);
   }
 }
 
@@ -96,11 +59,9 @@ if (is_post_request()){
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-<form action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post">
   Event Name:<br/>
   <input type="text" name="eventName"/><br/>
-  Select Event Picture:<br/>
-  <input type="file" name= "fileToUpload" id="fileToUpload"><br/>
   Location:<br/>
   <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" /><br/>
   <input type="hidden" id="cityLat" name="lat" />
