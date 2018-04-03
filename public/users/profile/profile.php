@@ -106,7 +106,7 @@ if (is_post_request()){
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Custom imports !-->
-    <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="<?=WWW_ROOT?>/css/profile.css">
 </head>
 
 <body>
@@ -116,8 +116,7 @@ if (is_post_request()){
       <!-- when database works:   <img src="" alt="image" /> -->
 
         <?php if ($_SESSION['type'] == 'student'){ ?>
-        <table>
-          <!--<p>"<?php echo $profile_pic['ProfilePic'] ?>" </p>-->
+        <!--<p>"<?php echo $profile_pic['ProfilePic'] ?>" </p>-->
           <img style="width:200px;height:170px;" src="<?php echo $profile_pic['ProfilePic'] ?>" alt="image" >
           <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
             <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple>
@@ -125,27 +124,29 @@ if (is_post_request()){
             <input type="submit" id="submitForFileUpload" value="Upload Image" name="submit" class="inputFile">
             <label for="submitForFileUpload">Upload Image</label>
           </form>
-
-          <th>Your Saved Events</th>
-          <tr>
-            <th>Name</th>
-            <th>&nbsp;</th>
-          </tr>
-          <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
-          <tr>
-            <td><?php echo $savedEvent['EventName'] ?></td>
-            <!-- Dynamically go through a for loop and echo the id in the url! -->
-            <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
-          </tr>
-        <?php } ?>
-        </table>
+        <div class="card horizontal profile-events-card">
+            <table>  
+              <th>Your Saved Events</th>
+              <tr>
+                <!--<th class="event-name-column-header">Name</th>
+                <th>&nbsp;</th>-->
+              </tr>
+              <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
+              <tr>
+                <td><?php echo $savedEvent['EventName'] ?></td>
+                <!-- Dynamically go through a for loop and echo the id in the url! -->
+                <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
+              </tr>
+            <?php } ?>
+            </table>
+        </div>
         <?php
           mysqli_free_result($savedEvents_set);
         ?>
         <div class="card horizontal tag-card">
             <div class="card-stacked"> 
                 <div class="card-content tag-card-content">
-                    <h3>My Tags</h3>
+                    <h2>My Tags</h2>
                     <ul>
                       <?php while($userTag = mysqli_fetch_assoc($userTags_set)){ ?>
                       <li class="tag"> <?php echo $userTag['TagName']; ?> </li>

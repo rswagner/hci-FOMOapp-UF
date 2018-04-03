@@ -45,6 +45,31 @@ img {
     margin-bottom: 15px;
 }
 
+th {
+    color: #d84315;
+    margin: 0px;
+    font-size: 2.56rem;
+    font-weight: normal;
+    padding: 0px 0px 0px;
+}
+
+td {
+    color: #084b81;
+}
+
+.event-name-column-header {
+    color: #084b81;
+    margin: 0px;
+    font-size: 1.56rem;
+    font-weight: normal;
+    padding: 0px;
+}
+
+.profile-events-card {
+    padding: 15px 15px;
+    margin-top: 30px;
+}
+
 .tag {
     font: inherit;
     color: white;
@@ -57,17 +82,25 @@ img {
 
 .tag-card {
     position: static;
+    margin-bottom: 25px;
 }
 .tag-card .tag-card-content {
     padding: 15px 15px;
 }
-.tag-card .tag-card-content h3 {
+.tag-card .tag-card-content h2 {
+    color: #d84315;
     margin: 0px;
+    font-size: 2.56rem;
 }
 
 footer {
-    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
     height: 55px;
+    background: #084b81;
+    border-top: 4px solid #db662c;
+    z-index: 10;
 }
 
 /*
