@@ -70,9 +70,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #FFBB6F;
 }
-html,body,h1,h2,h3,h4,h5,h6,input {font-family: "Roboto", sans-serif;}
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
-input[type=checkbox] ~ div  {
+input[type=checkbox] {
 	display:none; 
 }
 label { 
@@ -82,16 +82,10 @@ label {
 
 /* Toggled State */
 input[type=checkbox]:checked ~ div {
-	display:inline-block; 
-	font-size:16px; 
+   display:none; 
+   background: red;
 }
-.tag-container{
-    color:white;
-    font-size:16px;
-    text-align:center;
-    cursor:pointer;
-	vertical-align: middle;
-}
+
 </style>
 </head>
 
@@ -101,10 +95,10 @@ input[type=checkbox]:checked ~ div {
     <table style="border:5px; padding: 6px; margin-top:2em; font-family: 'Roboto', sans-serif; width:80%;" align="center">
 	  <col width="30%">
 	  <tr style= "color:#ffffff; background-color: #004d99;">
-		<th style="width:20%;" >Name</th>
-		<th style="width:20%; text-align:center;">Add Tag</th>
-		<th style="width:20%" >Name</th>
-		<th style="width:20%; text-align:center;" >Add Tag</th>
+		<th style="width:20%">Name</th>
+		<th style="width:20%">Add Tag</th>
+		<th style="width:20%">Name</th>
+		<th style="width:20%">Add Tag</th>
 	  </tr>
 	</table> 
   <?php while ($tag = mysqli_fetch_assoc($allTags_set)){?>
@@ -122,23 +116,19 @@ input[type=checkbox]:checked ~ div {
 		<td>
 			<label style="margin-left:5em; margin-top:0em;" align="center" class="btn btn-small waves-effect waves-light blue" for="<?php echo $tag['TagID'];?>" ><i style=""class="material-icons">add</i></label>
 			<input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" id="<?php echo $tag['TagID'];?>">
-			<div style="margin-left:6px; color:#004d99; " align="center">Added!</div> 
+			<div style="float:right;margin-right:1em;" align="center">add</div> 
 		</td>		
 		<?php $tag = mysqli_fetch_assoc($allTags_set)?>
 		<td style="padding-left:18px;"><?php echo $tag['TagName']?> </td>		
 		<td>
 			<label style="margin-left:5em; margin-top:0em;" align="center" class="btn btn-small waves-effect waves-light blue" for="<?php echo $tag['TagID'];?>"><i style=""class="material-icons">add</i></label>
 			<input type="checkbox" name="checkTagList[]" value="<?php echo $tag['TagID'];?>" id="<?php echo $tag['TagID'];?>">
-			<div style="margin-left:6px; color:#004d99;" >Added!</div> 
+			<div align="center">add</div> 
 		</td>	  
 	  </tr>
   </table> 
 
   <?php } 
-  mysqli_free_result($allTags_set);?>	
-  <div class="tag-container">
-  <center>  
-	<input type="submit" style="padding-top:0em; margin:2em; padding-right:20em;padding-left:20em; -moz-focus-inner { border:20em; padding-right:20em;padding-left:20em; };" class="btn-large waves-light blue"  value="Submit">
-  </center> 
-  </div> 
-  </form>
+  mysqli_free_result($allTags_set);?>		
+  <input type="submit" value="Submit">
+</form>
