@@ -52,6 +52,7 @@
 
           google.maps.event.addListener(markers[i], 'click', (function(marker, i) {
           return function() {
+			
             infowindow[i].open(map, markers[i]);
           }
         })(markers[i], i));

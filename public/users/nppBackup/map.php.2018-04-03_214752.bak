@@ -29,6 +29,7 @@
 
     function initMap() {
       var myLatLng = {lat: 29.6478715, lng: -82.3510823};
+	  var iframe = document.getElementById('mapIframe'); 
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: myLatLng
@@ -43,7 +44,7 @@
               position: pos,
               map: map
           });
-          var windowContent = "<a target='_top' href='" + eventDetails[i].url + "'>" + eventDetails[i].name + "</a><br>";
+          var windowContent = "<a href='" + eventDetails[i].url + "'>" + eventDetails[i].name + "</a><br>";
           windowContent += eventDetails[i].location + "<br>" + eventDetails[i].date + " " + eventDetails[i].startTime;
 
           infowindow[i] = new google.maps.InfoWindow({
@@ -52,7 +53,9 @@
 
           google.maps.event.addListener(markers[i], 'click', (function(marker, i) {
           return function() {
+			
             infowindow[i].open(map, markers[i]);
+			iframe.parentNode.removeChild(iframe);
           }
         })(markers[i], i));
       }
