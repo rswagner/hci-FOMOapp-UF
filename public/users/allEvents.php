@@ -51,21 +51,20 @@ function contact() {
         <?php }
         mysqli_free_result($recommendEvent_set); ?>
         $("#recEventsData").html(recommendText);
-		    var dirText = "<div class='testimonials' id='portfolio'><div class='container'><div class='row'><h1 class='os-animation' align='center' data-os-animation='bounceIn' data-os-animation-delay='0.2s'>Organizations @UF</h1><p style='margin-bottom:4em;' align='center' class='para os-animation' data-os-animation='bounceIn' data-os-animation-delay='0.4s'>These are our sponsored organizations</p></div>";
+		var dirText = "<div class='testimonials' id='portfolio'><div class='row'><h1 class='os-animation' align='center' data-os-animation='bounceIn' data-os-animation-delay='0.2s'>Organizations @UF</h1><p style='margin-bottom:4em;' align='center' class='para os-animation' data-os-animation='bounceIn' data-os-animation-delay='0.4s'>These are our sponsored organizations</p></div>";
         <?php while($org = mysqli_fetch_assoc($organizations_set)){?>
-          var pic = "<?php echo $org['ProfilePic']; ?>";
-          if (pic != ""){
-            dirText += "<div class='row'><div class='three columns reframe os-animation' data-os-animation='slideInLeft' data-os-animation-delay='0.6s'> <a href = '<?php echo url_for('/users/profile/orgInfo.php?id=' . $org['OrganizationID']);?>' > <img class ='reframe'src='profile/<?php echo $org['ProfilePic']; ?>' alt='' /></a></div><div class='nine columns os-animation' data-os-animation='slideInRight' data-os-animation-delay='0.6s'><div class='arrow_box'><h2 style='margin-top:-20px;'> <?php echo $org['OrganizationName']; ?> </h2><p> Click the image to visit their page! </p></div></div></div>"
-          }
-    <?php } ?>
-		dirText += "</div></div>"
+          //HTML/CSS GOES HERE!
+			var pic = "<?php echo $org['ProfilePic']; ?>";
+			if (pic != ""){
+				dirText += "<div class='row'><div class='three columns reframe os-animation' data-os-animation='slideInLeft' data-os-animation-delay='0.6s'> <a href = '<?php echo url_for('/users/profile/orgInfo.php?id=' . $org['OrganizationID']);?>' > <img class ='reframe'src='profile/<?php echo $org['ProfilePic']; ?>' alt='' /></a></div><div class='nine columns os-animation' data-os-animation='slideInRight' data-os-animation-delay='0.6s'><div class='arrow_box'><h2 style='margin-top:-20px;'> <?php echo $org['OrganizationName']; ?> </h2><p> Click the image to visit their page! </p></div></div></div>"
+			}
+		<?php } ?>
+		dirText += "</div>"
         <?php mysqli_free_result($organizations_set); ?>
         $("#directory").html(dirText);
         <?php }?> // end if student
       });
 </script>
-
-
 <body>
     <?php if ($_SESSION['type'] == 'org'){?>
     <div id="events-content" class="col s12 ">
