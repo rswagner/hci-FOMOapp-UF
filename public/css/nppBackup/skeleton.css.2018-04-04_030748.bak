@@ -1,0 +1,98 @@
+
+.reframe img {
+    position: relative;
+    float: left;
+    width: auto;
+	max-width:500px; 	
+    height: 220px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-bottom:10em;
+  box-sizing: border-box; }
+
+.column,
+.columns {
+  width: 100%;
+  float: left;
+  box-sizing: border-box; }
+
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .container {
+    width: 85%;
+    padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .container {
+    width: 80%; }
+  .column,
+  .columns {
+    margin-left: 1%; }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0; }
+
+  .one.column,
+  .one.columns                    { width: 4.66666666667%;  }
+  .three.columns                  { margin-left: -12%; margin-right: 27%; width: 33%;  margin-bottom:4em;        }
+  .nine.columns                   { width: 50.0%;          }
+
+  .one-third.column               { width: 30.6666666667%; }
+  .two-thirds.column              { width: 65.3333333333%; }
+
+  .one-half.column                { width: 48%; }
+
+  /* Offsets */
+
+  .offset-by-three.column,
+  .offset-by-three.columns        { margin-left: 10%;           }
+  .offset-by-nine.column,
+  .offset-by-nine.columns         { margin-left: 78.0%;        }
+
+  .offset-by-one-third.column,
+  .offset-by-one-third.columns    { margin-left: 34.6666666667%;  }
+  .offset-by-two-thirds.column,
+  .offset-by-two-thirds.columns   { margin-left: 69.3333333333%;  }
+
+  .offset-by-one-half.column,
+  .offset-by-one-half.columns     { margin-left: 52%; }
+
+}
+.testimonials{padding:80px 0 70px; position:relative;}
+
+.contactus{
+	padding:50px 5px 12px;
+	text-align:center;
+	background:#7cc576;
+	color:#fff;	
+	margin-top:-12em;
+}
+.contactus h2{text-transform:uppercase;}
+.contactus a{
+	padding:12px 0px;
+	max-width:170px;
+	text-align:center;
+	color:#fff;
+	border:3px solid #fff;
+	border-radius:5px;	
+	text-decoration:none;
+	margin:20px auto 0;
+	display:block;
+	font-size:18px;
+	font-weight:700;
+}
+.contactus a:hover{
+	background:#fff;
+	color:#7cc576;
+	transition:all 0.5s;	
+}

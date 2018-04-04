@@ -21,7 +21,15 @@ if ($_SESSION['type'] == "student"){
 
 ?>
 <?php include(SHARED_PATH . '/user_header.php'); ?>
-
+<!--META-->
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+<head>
+	<title>All Events View</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="<?=WWW_ROOT?>/css/allEvents.css">
+	<link rel="stylesheet" type="text/css" href="<?=WWW_ROOT?>/css/skeleton.css">
+</head>
 <script type="text/javascript">
     $(document).ready(function() {
         var allEventsText = "<div class='col s12 m7'>";
@@ -37,27 +45,25 @@ if ($_SESSION['type'] == "student"){
 			// recommendText += "<div class='card horizontal'> <div class='card-image'> <img src='<?php echo substr($event['EventPic'],3) ?>'> </div> <div class='card-stacked'> <div class='card-content'><h4><?php echo date('m/d/Y', strtotime($event['Date'])); ?></h4><h2><?php echo $event['EventName'] ?></h2><h4><?php echo date('h:i a', strtotime($event['StartTime'])); ?>-<?php echo date('h:i a', strtotime($event['EndTime'])); ?></h4><h3><?php echo $event['Location'] ?></h3> </div> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'>View</a> </div> </div> </div> </div>"
       recommendText +=  "<div class='card horizontal'> <div class='card-stacked'> <div class='card-content'> <div class='card-headings'> <h1> <?php echo $event['EventName'] ?> </h1> <h2> <?php echo date('m/d/Y', strtotime($event['Date'])); ?> </h2> <h2> <?php echo date('h:i a', strtotime($event['StartTime'])); ?>- <?php echo date('h:i a', strtotime($event['EndTime'])); ?> </h2> <h3> <?php echo $event['Location'] ?> </h3> </div> <img class='card-image' src='<?php echo substr($event['EventPic'],3) ?>'> </div class='view'> <div class='card-action'> <a href='<?php echo url_for('/users/singleEvent/info.php?id=' . $event['EventID']);?>'><i class='material-icons'>open_in_browser</i>View</a> </div> </div> </div> </div>"
 
-
-
-
         <?php }
         mysqli_free_result($recommendEvent_set); ?>
         $("#recEventsData").html(recommendText);
-
-        <?php while($event = mysqli_fetch_assoc($organizations_set)){?>
+		var dirText = "<div class='testimonials' id='portfolio'><div class='container'><div class='row'><h1 class='os-animation' align='center' data-os-animation='bounceIn' data-os-animation-delay='0.2s'>Organizations @UF</h1><p style='margin-bottom:4em;' align='center' class='para os-animation' data-os-animation='bounceIn' data-os-animation-delay='0.4s'>Our sponsored organizations. If you would like to register, contact FOMO@ufl.edu</p></div>";
+        <?php while($org = mysqli_fetch_assoc($organizations_set)){?>
           //HTML/CSS GOES HERE!
-
-          <?php }
-          mysqli_free_result($organizations_set); ?>
+			var pic = "<?php echo $org['ProfilePic']; ?>";
+			if (pic != ""){
+				dirText += "<div class='row'><div class='three columns reframe os-animation' data-os-animation='slideInLeft' data-os-animation-delay='0.6s'><img class ='reframe' src='profile/<?php echo $org['ProfilePic']; ?>' alt='' /></div><div class='nine columns os-animation' data-os-animation='slideInRight' data-os-animation-delay='0.6s'><div class='arrow_box'><h2 style='margin-top:-20px;'> <?php echo $org['OrganizationName']; ?> </h2><p> Click the image to visit their page! </p></div></div></div>"
+			}
+		<?php } ?>
+		dirText += "</div></div>" 
+        <?php mysqli_free_result($organizations_set); ?>
+        $("#directory").html(dirText); 
 
         <?php }?> // end if student
       });
 </script>
 
-<title>All Events View</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="<?=WWW_ROOT?>/css/allEvents.css">
 
 <body>
     <?php if ($_SESSION['type'] == 'org'){?>
@@ -86,6 +92,18 @@ if ($_SESSION['type'] == "student"){
         <div id="recEventsData">
         </div>
     </div>
+	<div id="dir-content" class="col s12">
+        <div id="directory">
+        </div>
+		<div class="contactus" id="contact">
+			<div class="container">
+				<div class="row">
+					<h2 class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.3s">ready to register your organization</h2>
+					<a href="#" class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.5s">CONTACT US</a>
+				</div>
+			</div>
+		</div>  
+    </div>	
     <div id="map" class="col s12">
         <div id="mapData">
             <iframe height="100%" id="mapIframe" width="100%" src="map.php" style="border:none; margin-top:-5px;" name="target"></iframe>
