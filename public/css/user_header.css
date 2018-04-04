@@ -37,7 +37,7 @@ nav ul a{
   color: white;
   position: absolute;
   font-weight: 200;
-  padding-left: 2em;
+  margin-left: 2em;
   line-height: 55%;
   font-size: 4em;
 }
