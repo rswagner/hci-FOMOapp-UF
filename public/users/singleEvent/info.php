@@ -72,7 +72,7 @@ if(!isset($_GET['id'])) {
     <div class="event-details">
       <div class="event-tile">
         <h2><?php echo $event['EventName'];?></h2>
-        <?php if ($_SESSION['type'] == "org"){ ?>
+        <?php if ($_SESSION['type'] == "student"){ ?>
           <h3>
             <a href="<?php echo url_for('/users/profile/orgInfo.php?id=' . $event['OrganizationID']);?>">
               By <?php echo  $event['OrganizationName'];?>

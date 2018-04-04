@@ -24,7 +24,7 @@ if (is_post_request()){
   $sql = "INSERT INTO users.Tags";
   $sql .= "(id) ";
   $sql .= "VALUES (";
-  
+
   $sql .= "'" . $tags['id'] . "'";
   $sql .= ")";
   $result = mysqli_query($db, $sql);
@@ -55,11 +55,8 @@ if (is_post_request()){
         })
     });
   </script>
-  
+
 <?php include(SHARED_PATH . '/user_header.php') ?>
-<!doctype html>
-
-
   <body>
   <center>
   <h1>Welcome <?php echo $_SESSION['username'] ?? ''; ?></h1>
@@ -81,8 +78,8 @@ if (is_post_request()){
     <?php
       mysqli_free_result($savedEvent_set);
     ?>
-	
-	
+
+
 	<table>
       <tr>
         <th>Your Tags</th>
@@ -105,10 +102,10 @@ if (is_post_request()){
 			<th>&nbsp;</th>
 		  </tr>
 		  <tr>
-			<td><input  value="Free Food" type="submit" id="freeFood" name="tag"></input></td>			
+			<td><input  value="Free Food" type="submit" id="freeFood" name="tag"></input></td>
 		 </tr>
 		 <tr>
-			<td><input  value="Video Games" type="submit" id="videoGames" name="tag"></input></td>		
+			<td><input  value="Video Games" type="submit" id="videoGames" name="tag"></input></td>
 		 </tr>
 		</table>
 	</form>
