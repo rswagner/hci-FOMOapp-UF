@@ -116,7 +116,7 @@ function contact() {
     <footer>
         <div class="footer-bar">
             <center>
-                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="../images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
+                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="<?=WWW_ROOT?>/images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
             </center>
         </div>
     </footer>

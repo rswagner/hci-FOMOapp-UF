@@ -44,8 +44,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Custom imports !-->
     <link rel="stylesheet" href="../css/main.css">
-	<link rel="stylesheet" href="../css/pretty-checkbox.css">
-	<link rel="stylesheet" href="../css/pretty-checkbox.min.css">
+	<link rel="stylesheet" href="<?=WWW_ROOT?>/css/allEvents.css">	
     <script type="text/javascript" src="../javascript/main.js"></script>
 <style>
 
@@ -91,7 +90,8 @@ input[type=checkbox]:checked ~ div {
 }
 </style>
 </head>
-
+<body>
+<h2 align="center"> Click on each button to add a tag and then submit!</h2> 
 	
 <form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
 
@@ -139,3 +139,11 @@ input[type=checkbox]:checked ~ div {
   </center> 
   </div> 
   </form>
+    <footer>
+        <div class="footer-bar">
+            <center>
+                <a href="https://www.studentinvolvement.ufl.edu/Student-Organizations"><img src="<?=WWW_ROOT?>/images/soar.png" alt="SOAR" style="height: 30px; margin: 10px"></a>
+            </center>
+        </div>
+    </footer>
+	</body>
