@@ -41,7 +41,7 @@ if(!isset($_GET['id'])) {
         $("#saveEvent").html("Save Event")
       <?php }?>
       $("#saveEvent").click(function(){
-        if ($("#saveEvent").html() == "Unsave Event"){
+        if (document.getElementById("saveEvent").innerHTML == "Unsave Event"){
           $.ajax({
               url: "<?php echo url_for('/users/singleEvent/unsave.php');?>",
               type: "POST",
@@ -125,7 +125,7 @@ if(!isset($_GET['id'])) {
           <?php } ?>
       </div>
       <?php if ($_SESSION['type'] == 'student'){?>
-      <a id="saveEvent" type=button class="waves-effect waves-light btn">Save Event</a>
+      <a id="saveEvent" class="btn" type=button ></a>
       <?php }?><h3>Description</h3>
         <p><?php echo $event['Description']; ?></p>
     </div>
