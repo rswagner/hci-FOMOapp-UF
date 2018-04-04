@@ -194,9 +194,13 @@ if (is_post_request()){
             <label for="textarea1">Event Description</label>
           </div>
         </div>
-          <button class="btn waves-effect waves-light" type="submit" name="submit" id="submit">Submit
-            <i class="material-icons right">send</i>
-          </button>
+        <div class="row">
+          <div class="input-field col s4 offset-s5">
+            <button class="btn waves-effect waves-light" type="submit" name="submit" id="submit">Submit<i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+
         </form>
   </div>
   </div>
