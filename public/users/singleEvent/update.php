@@ -198,7 +198,7 @@ if(is_post_request()) {
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea  name="description" id="textarea1" class="materialize-textarea" ><?php echo $event['Description']; ?>></textarea>
+          <textarea  name="description" id="textarea1" class="materialize-textarea" ><?php echo $event['Description']; ?></textarea>
           <label for="textarea1">Event Description</label>
         </div>
       </div>
