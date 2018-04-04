@@ -105,6 +105,7 @@ tr td:last-child{
 }
 
 footer {
+    position: inherit;
     width: 100%;
     bottom: 0;
     left: 0;
