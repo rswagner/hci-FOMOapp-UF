@@ -95,7 +95,9 @@ if(!isset($_GET['id'])) {
         </h3>
       <?php } ?>
         <h4>
+          <a href="https://maps.google.com/?ll=<?php echo $event['Latitude']?>,<?php echo $event['Longitude']?>" target="_blank">
             <?php echo $event['Location']; ?>
+          </a>
         </h4>
         <h4>
             <?php echo date('m/d/Y', strtotime($event['Date'])); ?>
