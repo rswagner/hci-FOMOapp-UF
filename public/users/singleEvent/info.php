@@ -119,13 +119,7 @@ if(!isset($_GET['id'])) {
         <div class="tags">
             <h3>Event Tags</h3>
             <?php if ($_SESSION['type'] == 'org'){?>
-<<<<<<< HEAD
-            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags">Edit Tags<i class="medium material-icons">open_in_browser</i></a>
-||||||| merged common ancestors
-            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags"><i class="medium material-icons">edit</i>Edit Tags</a>
-=======
-            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags"><i class="medium material-icons">edit</i>Reset Tags</a>
->>>>>>> bec3d1a7a438a0cc5ea33562f8ddc952af77fa2d
+            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags">Reset Tags<i class="medium material-icons">open_in_browser</i></a>
             <?php } ?>
             <ul>
                 <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>

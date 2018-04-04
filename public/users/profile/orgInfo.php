@@ -35,10 +35,6 @@
             <table>
               <th>Host Events</th>
               <tr>
-                <!--<th class="event-name-column-header">Name</th>
-                <th>&nbsp;</th>-->
-              </tr>
-              <tr>
                 <td><?php echo $info['EventName'] ?></td>
                 <!-- Dynamically go through a for loop and echo the id in the url! -->
                 <td>

@@ -121,9 +121,6 @@ if (is_post_request()){
 <body>
     <div class="profile-container">
         <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
-
-      <!-- when database works:   <img src="" alt="image" /> -->
-        <!--<img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >-->
         <div class="reframe card">
             <img src="<?php echo $info['ProfilePic'] ?>" alt="image" >
         </div>
@@ -137,10 +134,6 @@ if (is_post_request()){
         <div class="card horizontal profile-events-card">
             <table>
               <th>Your Saved Events</th>
-              <tr>
-                <!--<th class="event-name-column-header">Name</th>
-                <th>&nbsp;</th>-->
-              </tr>
               <?php while($savedEvent = mysqli_fetch_assoc($savedEvents_set)){ ?>
               <tr>
                 <td><?php echo $savedEvent['EventName'] ?></td>
