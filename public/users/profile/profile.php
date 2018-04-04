@@ -124,7 +124,7 @@ if (is_post_request()){
 
       <!-- when database works:   <img src="" alt="image" /> -->
         <!--<img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >-->
-        <div class="reframe">
+        <div class="reframe card">
             <img src="<?php echo $info['ProfilePic'] ?>" alt="image" >
         </div>
         <form class="upload-file-form" action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">

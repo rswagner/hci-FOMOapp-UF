@@ -45,7 +45,6 @@ a {
 .reframe img {
     height: auto;
     width: 200px;
-    border:1px solid #084b81;
 }
 
 .upload-file-form {
