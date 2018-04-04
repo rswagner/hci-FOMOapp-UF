@@ -35,8 +35,6 @@
     <meta charset="utf-8">
     <title>FOMO UF APP</title>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -50,11 +48,6 @@
 	<link rel="stylesheet" href="../css/pretty-checkbox.min.css">
     <script type="text/javascript" src="../javascript/main.js"></script>
 <style>
-table {
-    font-family: "Roboto", sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
 td, th {
 	border: 1px; 
@@ -70,7 +63,11 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #FFBB6F;
 }
-html,body,h1,h2,h3,h4,h5,h6,input {font-family: "Roboto", sans-serif;}
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
 
 input[type=checkbox] ~ div  {
 	display:none; 

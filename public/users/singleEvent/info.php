@@ -7,7 +7,7 @@ if(!isset($_GET['id'])) {
 }
   $id = $_GET['id'];
 
-  $sql = "SELECT users.Events.*, users.Organizations.OrganizationName FROM users.Events ";
+  $sql = "SELECT users.Events.*, users.Organizations.OrganizationName, users.Organizations.OrganizationID FROM users.Events ";
   $sql .= "INNER JOIN users.Organizations ON users.Events.OrganizationID = users.Organizations.OrganizationID ";
   $sql .= "WHERE EventID ='" . $id . "'";
   $single_event_set = mysqli_query($db, $sql);
@@ -83,9 +83,17 @@ if(!isset($_GET['id'])) {
             </div>
             <?php }?>
         </div>
+        <?php if ($_SESSION['type'] == "student"){ ?>
+          <h3>
+            <a href="<?php echo url_for('/users/profile/orgInfo.php?id=' . $event['OrganizationID']);?>">
+              By <?php echo  $event['OrganizationName'];?>
+            </a>
+          </h3>
+        <?php }else { ?>
         <h3>By
             <?php echo  $event['OrganizationName'];?>
         </h3>
+      <?php } ?>
         <h4>
             <?php echo $event['Location']; ?>
         </h4>
@@ -111,7 +119,13 @@ if(!isset($_GET['id'])) {
         <div class="tags">
             <h3>Event Tags</h3>
             <?php if ($_SESSION['type'] == 'org'){?>
+<<<<<<< HEAD
             <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags">Edit Tags<i class="medium material-icons">open_in_browser</i></a>
+||||||| merged common ancestors
+            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags"><i class="medium material-icons">edit</i>Edit Tags</a>
+=======
+            <a href="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $event['EventID']);?>" title="Edit tags"><i class="medium material-icons">edit</i>Reset Tags</a>
+>>>>>>> bec3d1a7a438a0cc5ea33562f8ddc952af77fa2d
             <?php } ?>
             <ul>
                 <?php while($eventTag = mysqli_fetch_assoc($eventTags_set)){ ?>

@@ -38,8 +38,6 @@
     <meta charset="utf-8">
     <title>FOMO UF APP</title>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -48,17 +46,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Custom imports !-->
-    <link rel="stylesheet" href="../css/main.css">
-	<link rel="stylesheet" href="../css/pretty-checkbox.css">
-	<link rel="stylesheet" href="../css/pretty-checkbox.min.css">
-    <script type="text/javascript" src="../javascript/main.js"></script>
-<style>
-table {
-    font-family: "Roboto", sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
+<style>
 td, th {
 	border: 1px; 
 	border-style: inset;
@@ -73,7 +62,11 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #FFBB6F;
 }
-html,body,h1,h2,h3,h4,h5,h6,input {font-family: "Roboto", sans-serif;}
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
 
 input[type=checkbox] ~ div  {
 	display:none; 
@@ -88,20 +81,14 @@ input[type=checkbox]:checked ~ div {
 	display:inline-block; 
 	font-size:16px; 
 }
-.tag-container{
-    color:white;
-    font-size:16px;
-    text-align:center;
-    cursor:pointer;
-	vertical-align: middle;
-}
+
 </style>
 </head>
-
+<body>
 	
 <form action="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $id)?>" method="post">
 
-    <table style="border:5px; padding: 6px; margin-top:2em; font-family: 'Roboto', sans-serif; width:80%;" align="center">
+    <table style="border:5px; padding: 6px; margin-top:2em;width:80%;" align="center">
 	  <col width="30%">
 	  <tr style= "color:#ffffff; background-color: #004d99;">
 		<th style="width:20%;" >Name</th>
@@ -137,13 +124,9 @@ input[type=checkbox]:checked ~ div {
 	  </tr>
   </table> 
 
-  <?php } 
-  mysqli_free_result($allTags_set);?>	
-  <div class="tag-container">
+  <?php } mysqli_free_result($allTags_set);?>	
   <center>  
-	<input type="submit" style="padding-top:0em; margin:2em; padding-right:20em;padding-left:20em; -moz-focus-inner { border:20em; padding-right:20em;padding-left:20em; };" class="btn-large waves-light blue"  value="Submit">
+	<input type="submit" style="padding-top:0em; margin:2em; padding-right:20em;padding-left:20em; " class="btn-large waves-light blue"  value="Submit">
   </center> 
-  </div> 
   </form>
-  
-  
+</body>   

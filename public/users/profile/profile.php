@@ -155,7 +155,7 @@ if (is_post_request()){
                         $description = $savedEvent['Description'];
                     ?>
                     <a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
-                <td><a href="ical.php?date=<?=$date?>&amp;location=<?=$location?>&amp;startTime=<?=$startTime?>&amp;endTime=<?=$endTime?>&amp;title=<?=$title?>&amp;description=<?=$description?>">Add Event to Your Calendar</a></td>
+                <td><a href="ical.php?date=<?=$date?>&amp;location=<?=$location?>&amp;startTime=<?=$startTime?>&amp;endTime=<?=$endTime?>&amp;title=<?=$title?>&amp;description=<?=$description?>">Add to Cal</a></td>
               </tr>
             <?php } ?>
             </table>
@@ -174,7 +174,7 @@ if (is_post_request()){
                     </ul>
                 </div>
                 <div class="card-action">
-                    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
+                    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Reset Tags</a>
                 </div>
             </div>
         </div>
