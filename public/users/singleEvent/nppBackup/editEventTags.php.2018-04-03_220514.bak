@@ -33,7 +33,7 @@
   $allTags_set = mysqli_query($db, $sql);
 
 ?>
-<?php include(SHARED_PATH . '/user_header.php'); ?>
+
 <head>
     <meta charset="utf-8">
     <title>FOMO UF APP</title>
@@ -145,5 +145,3 @@ input[type=checkbox]:checked ~ div {
   </center> 
   </div> 
   </form>
-  
-  
