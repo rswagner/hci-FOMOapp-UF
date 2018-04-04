@@ -14,6 +14,9 @@ if ($_SESSION['type'] == "student"){
   $sql .= "(SELECT users.EventTags.EventID FROM users.EventTags WHERE users.EventTags.TagID  in ";
   $sql .= "(SELECT users.UserTags.TagID FROM users.UserTags WHERE users.UserTags.StudentID = '" . $_SESSION['id'] . "'))";
   $recommendEvent_set = mysqli_query($db, $sql);
+
+  $sql = "SELECT OrganizationName, ProfilePic FROM users.Organizations";
+  $organizations_set = mysqli_query($db, $sql);
 }
 
 ?>
@@ -35,6 +38,13 @@ if ($_SESSION['type'] == "student"){
         <?php }
         mysqli_free_result($recommendEvent_set); ?>
         $("#recEventsData").html(recommendText);
+
+        <?php while($event = mysqli_fetch_assoc($organizations_set)){?>
+          //HTML/CSS GOES HERE!
+
+          <?php }
+          mysqli_free_result($organizations_set); ?>
+          
         <?php }?> // end if student
       });
 </script>
