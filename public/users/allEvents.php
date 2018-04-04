@@ -49,7 +49,7 @@ if ($_SESSION['type'] == "student"){
 
           <?php }
           mysqli_free_result($organizations_set); ?>
-          
+
         <?php }?> // end if student
       });
 </script>
@@ -82,39 +82,6 @@ if ($_SESSION['type'] == "student"){
        <div id="eventsData">
        </div>
    </div>
-        <!-- <div class='col s12 m7'>
-            <div class='card horizontal'>
-                <div class='card-stacked'>
-                    <div class='card-content'>
-                      <div class="card-headings">
-                        <h1>
-                          <?php echo $event['EventName'] ?>
-                        </h1>
-                        <h2>
-                          <?php echo date('m/d/Y', strtotime($event['Date'])); ?>
-                        </h2>
-
-
-                        <h2>
-                            <?php echo date('h:i a', strtotime($event['StartTime'])); ?>-
-                            <?php echo date('h:i a', strtotime($event['EndTime'])); ?>
-                        </h2>
-                        <h3>
-                          <?php echo $event['Location'] ?>
-                        </h3>
-
-
-                      </div>
-                    <img class="card-image" src="./../images/Latnx.jpg">
-                    <img class="card-image" src='<?php echo substr($event['EventPic'],3) ?>'>
-
-                  </div class="view">
-                    <div class='card-action'> <a href='<?php echo url_for(' /users/singleEvent/info.php?id=' . $event[' EventID ']);?>'>      <i class="material-icons">add</i>View</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div id="rec-content" class="col s12">
         <div id="recEventsData">
         </div>
