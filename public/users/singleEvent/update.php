@@ -70,13 +70,15 @@ if(is_post_request()) {
 
             $sql = "UPDATE users.Events SET ";
             $sql .= "EventName='" . mysqli_real_escape_string($db, $event['EventName']) . "', ";
-            $sql .= "Location='" . mysqli_real_escape_string($db, $event['Location']) . "', ";
+            if ($event['Location']){
+              $sql .= "Location='" . mysqli_real_escape_string($db, $event['Location']) . "', ";
+              $sql .= "Longitude='" . $event['Longitude'] . "', ";
+              $sql .= "Latitude='" . $event['Latitude'] . "', ";
+            }
             $sql .= "Date='" . $event['Date'] . "', ";
             $sql .= "StartTime='" . $event['StartTime'] . "', ";
             $sql .= "EndTime='" . $event['EndTime'] . "', ";
             $sql .= "Description='" . mysqli_real_escape_string($db, $event['Description']) . "', ";
-            $sql .= "Longitude='" . $event['Longitude'] . "', ";
-            $sql .= "Latitude='" . $event['Latitude'] . "', ";
             $sql .= "EventPic='" . $event['EventPic'] . "' ";
             $sql .= "WHERE EventID='" . $id . "' ";
             $sql .= "LIMIT 1";
@@ -106,13 +108,15 @@ if(is_post_request()) {
 
     $sql = "UPDATE users.Events SET ";
     $sql .= "EventName='" . mysqli_real_escape_string($db, $event['EventName']) . "', ";
-    $sql .= "Location='" . mysqli_real_escape_string($db, $event['Location']) . "', ";
+    if ($event['Location']){
+      $sql .= "Location='" . mysqli_real_escape_string($db, $event['Location']) . "', ";
+      $sql .= "Longitude='" . $event['Longitude'] . "', ";
+      $sql .= "Latitude='" . $event['Latitude'] . "', ";
+    }
     $sql .= "Date='" . $event['Date'] . "', ";
     $sql .= "StartTime='" . $event['StartTime'] . "', ";
     $sql .= "EndTime='" . $event['EndTime'] . "', ";
-    $sql .= "Description='" . mysqli_real_escape_string($db, $event['Description']) . "', ";
-    $sql .= "Longitude='" . $event['Longitude'] . "', ";
-    $sql .= "Latitude='" . $event['Latitude'] . "' ";
+    $sql .= "Description='" . mysqli_real_escape_string($db, $event['Description']) . "' ";
     $sql .= "WHERE EventID='" . $id . "' ";
     $sql .= "LIMIT 1";
 
