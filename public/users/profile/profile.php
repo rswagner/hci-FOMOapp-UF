@@ -151,7 +151,17 @@ if (is_post_request()){
               <tr>
                 <td><?php echo $savedEvent['EventName'] ?></td>
                 <!-- Dynamically go through a for loop and echo the id in the url! -->
-                <td><a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
+                <td>
+                    <?php 
+                        $date = str_replace("-","",$savedEvent['Date']);
+                        $location = $savedEvent['Location'];
+                        $startTime = str_replace(":","",$savedEvent['StartTime']);
+                        $endTime = str_replace(":","",$savedEvent['EndTime']);
+                        $title = $savedEvent['EventName'];
+                        $description = $savedEvent['Description'];
+                    ?>
+                    <a href="<?php echo url_for('/users/singleEvent/info.php?id=' . $savedEvent['EventID']);?>">View</a></td>
+                <td><a href="ical.php?date=<?=$date?>&amp;location=<?=$location?>&amp;startTime=<?=$startTime?>&amp;endTime=<?=$endTime?>&amp;title=<?=$title?>&amp;description=<?=$description?>">Add Event to Your Calendar</a></td>
               </tr>
             <?php } ?>
             </table>
