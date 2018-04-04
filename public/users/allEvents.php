@@ -112,7 +112,6 @@ function contact() {
     <div id="map" class="col s12">
         <div id="mapData">
             <iframe height="100%" id="mapIframe" width="100%" src="map.php" style="border:none; margin-top:-5px;" name="target"></iframe>
-            <p> test </p>
         </div>
     </div>
     <div id="gator-times-content" class="col s12">
