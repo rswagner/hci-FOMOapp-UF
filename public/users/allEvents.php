@@ -30,6 +30,11 @@ if ($_SESSION['type'] == "student"){
 	<link rel="stylesheet" href="<?=WWW_ROOT?>/css/allEvents.css">
 	<link rel="stylesheet" type="text/css" href="<?=WWW_ROOT?>/css/skeleton.css">
 </head>
+<script>
+function contact() {
+    document.getElementById("email").innerHTML = "email us -> FOMO@live.com";
+}
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         var allEventsText = "<div class='col s12 m7'>";
@@ -48,7 +53,7 @@ if ($_SESSION['type'] == "student"){
         <?php }
         mysqli_free_result($recommendEvent_set); ?>
         $("#recEventsData").html(recommendText);
-		var dirText = "<div class='testimonials' id='portfolio'><div class='container'><div class='row'><h1 class='os-animation' align='center' data-os-animation='bounceIn' data-os-animation-delay='0.2s'>Organizations @UF</h1><p style='margin-bottom:4em;' align='center' class='para os-animation' data-os-animation='bounceIn' data-os-animation-delay='0.4s'>Our sponsored organizations. If you would like to register, contact FOMO@ufl.edu</p></div>";
+		var dirText = "<div class='testimonials' id='portfolio'><div class='container'><div class='row'><h1 class='os-animation' align='center' data-os-animation='bounceIn' data-os-animation-delay='0.2s'>Organizations @UF</h1><p style='margin-bottom:4em;' align='center' class='para os-animation' data-os-animation='bounceIn' data-os-animation-delay='0.4s'>These are our sponsored organizations</p></div>";
         <?php while($org = mysqli_fetch_assoc($organizations_set)){?>
           //HTML/CSS GOES HERE!
 			var pic = "<?php echo $org['ProfilePic']; ?>";
@@ -98,8 +103,8 @@ if ($_SESSION['type'] == "student"){
 		<div class="contactus" id="contact">
 			<div class="container">
 				<div class="row">
-					<h2 class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.3s">ready to register your organization</h2>
-					<a href="#" class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.5s">CONTACT US</a>
+					<h2 class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.3s">ready to register your organization?</h2>
+					<a onclick='contact()' id="email" style="margin-top:2em;"class="os-animation" data-os-animation="bounceIn" data-os-animation-delay="0.5s">CONTACT US</a>
 				</div>
 			</div>
 		</div>  
