@@ -190,7 +190,7 @@ if (is_post_request()){
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" data-length="300"></textarea>
+            <textarea id="textarea1" class="materialize-textarea" name="description" data-length="300"></textarea>
             <label for="textarea1">Event Description</label>
           </div>
         </div>
