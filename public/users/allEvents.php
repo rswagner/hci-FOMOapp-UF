@@ -46,6 +46,7 @@ if ($_SESSION['type'] == "student"){
 
 <body>
     <?php if ($_SESSION['type'] == 'org'){?>
+<<<<<<< HEAD
     <div id="events-content" class="col s12 ">
         <h1>MY HOST EVENTS<a class="btn-floating btn-large waves-effect waves-light orange" href="<?php echo url_for('/users/singleEvent/create.php');?>"><i class="material-icons">add</i></a></h1>
         <div id="eventsData">
