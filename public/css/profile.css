@@ -37,14 +37,14 @@ a {
 }
 
 .reframe {
-    height: 170px;
+    height: auto;
     width: 200px;
     overflow: hidden;
 }
 
 .reframe img {
     height: auto;
-    width: 200px;
+    width: 100%;
 }
 
 .upload-file-form {
