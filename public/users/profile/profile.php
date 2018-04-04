@@ -174,7 +174,7 @@ if (is_post_request()){
                     </ul>
                 </div>
                 <div class="card-action">
-                    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Edit Tags</a>
+                    <a href="<?php echo url_for('/users/profile/editUserTags.php');?>">Reset Tags</a>
                 </div>
             </div>
         </div>
