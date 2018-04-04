@@ -196,7 +196,7 @@ if (is_post_request()){
         </div>
         <div class="row">
           <div class="input-field col s4 offset-s5">
-            <button class="btn waves-effect waves-light" type="submit" name="submit" id="submit">Submit<i class="material-icons right">send</i>
+            <button class="btn waves-effect waves-light" type="submit" name="submit" value="Submit"  id="submit">Submit<i class="material-icons right">send</i>
             </button>
           </div>
         </div>
