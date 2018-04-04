@@ -98,12 +98,12 @@ if (is_post_request()){
     $sql .= "(OrganizationID, Location, Date, StartTime, EndTime, Description, EventName, Longitude, Latitude) ";
     $sql .= "VALUES (";
     $sql .= "'" . $event['OrganizationID'] . "',";
-    $sql .= "'" . mysql_real_escape_string($event['Location']) . "',";
+    $sql .= "'" . mysqli_real_escape_string($db, $event['Location']) . "',";
     $sql .= "'" . $event['Date'] . "',";
     $sql .= "'" . $event['StartTime'] . "',";
     $sql .= "'" . $event['EndTime'] . "',";
-    $sql .= "'" . mysql_real_escape_string($event['Description']) . "',";
-    $sql .= "'" . mysql_real_escape_string($event['EventName']) . "',";
+    $sql .= "'" . mysqli_real_escape_string($db, $event['Description']) . "',";
+    $sql .= "'" . mysqli_real_escape_string($db, $event['EventName']) . "',";
     $sql .= "'" . $event['Longitude'] . "',";
     $sql .= "'" . $event['Latitude'] . "'";
     $sql .= ")";

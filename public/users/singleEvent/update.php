@@ -7,10 +7,10 @@ if(!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'] ;
-if(is_get_request()) {
-
-  $sql = "SELECT * FROM users.Events WHERE EventID='" . db_espace($db,$id) . "'";
-  $single_event_set = mysqli_query($db, $sql);
+$sql = "SELECT * FROM users.Events WHERE EventID='" . db_espace($db,$id) . "'";
+$single_event_set = mysqli_query($db, $sql);
+$event = mysqli_fetch_assoc($single_event_set);
+mysqli_free_result($single_event_set);
 
 if(is_post_request()) {
   if ($_FILES["fileToUpload"]["name"]){
@@ -69,12 +69,12 @@ if(is_post_request()) {
 
 
             $sql = "UPDATE users.Events SET ";
-            $sql .= "EventName='" . mysql_real_escape_string($event['EventName']) . "', ";
-            $sql .= "Location='" . mysql_real_escape_string($event['Location']) . "', ";
+            $sql .= "EventName='" . mysqli_real_escape_string($db, $event['EventName']) . "', ";
+            $sql .= "Location='" . mysqli_real_escape_string($db, $event['Location']) . "', ";
             $sql .= "Date='" . $event['Date'] . "', ";
             $sql .= "StartTime='" . $event['StartTime'] . "', ";
             $sql .= "EndTime='" . $event['EndTime'] . "', ";
-            $sql .= "Description='" . mysql_real_escape_string($event['Description']) . "', ";
+            $sql .= "Description='" . mysqli_real_escape_string($db, $event['Description']) . "', ";
             $sql .= "Longitude='" . $event['Longitude'] . "', ";
             $sql .= "Latitude='" . $event['Latitude'] . "', ";
             $sql .= "EventPic='" . $event['EventPic'] . "' ";
