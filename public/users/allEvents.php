@@ -15,7 +15,7 @@ if ($_SESSION['type'] == "student"){
   $sql .= "(SELECT users.UserTags.TagID FROM users.UserTags WHERE users.UserTags.StudentID = '" . $_SESSION['id'] . "'))";
   $recommendEvent_set = mysqli_query($db, $sql);
 
-  $sql = "SELECT OrganizationName, ProfilePic FROM users.Organizations";
+  $sql = "SELECT OrganizationName, OrganizationID, ProfilePic FROM users.Organizations";
   $organizations_set = mysqli_query($db, $sql);
 }
 
@@ -58,7 +58,7 @@ function contact() {
           //HTML/CSS GOES HERE!
 			var pic = "<?php echo $org['ProfilePic']; ?>";
 			if (pic != ""){
-				dirText += "<div class='row'><div class='three columns reframe os-animation' data-os-animation='slideInLeft' data-os-animation-delay='0.6s'><img class ='reframe' src='profile/<?php echo $org['ProfilePic']; ?>' alt='' /></div><div class='nine columns os-animation' data-os-animation='slideInRight' data-os-animation-delay='0.6s'><div class='arrow_box'><h2 style='margin-top:-20px;'> <?php echo $org['OrganizationName']; ?> </h2><p> Click the image to visit their page! </p></div></div></div>"
+				dirText += "<div class='row'><div class='three columns reframe os-animation' data-os-animation='slideInLeft' data-os-animation-delay='0.6s'> <a href = '<?php echo url_for('/users/profile/orgInfo.php?id=' . $org['OrganizationID']);?>' > <img class ='reframe'src='profile/<?php echo $org['ProfilePic']; ?>' alt='' /></a></div><div class='nine columns os-animation' data-os-animation='slideInRight' data-os-animation-delay='0.6s'><div class='arrow_box'><h2 style='margin-top:-20px;'> <?php echo $org['OrganizationName']; ?> </h2><p> Click the image to visit their page! </p></div></div></div>"
 			}
 		<?php } ?>
 		dirText += "</div></div>" 
