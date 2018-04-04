@@ -123,8 +123,11 @@ if (is_post_request()){
         <h1><?php echo $_SESSION['name'] ?? ''; ?></h1>
 
       <!-- when database works:   <img src="" alt="image" /> -->
-        <img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >
-        <form action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
+        <!--<img style="width:200px;height:170px;" src="<?php echo $info['ProfilePic'] ?>" alt="image" >-->
+        <div class="reframe">
+            <img src="<?php echo $info['ProfilePic'] ?>" alt="image" >
+        </div>
+        <form class="upload-file-form" action= "<?php echo url_for('/users/profile/profile.php');?>" method="post" enctype="multipart/form-data">
           <input type="file" name="fileToUpload" id="fileToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple>
           <label for="fileToUpload"><span>Choose File</span></label>
           <input type="submit" id="submitForFileUpload" value="Upload Image" name="submit" class="inputFile">

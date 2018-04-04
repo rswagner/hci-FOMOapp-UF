@@ -36,9 +36,20 @@ a {
     margin-right: 5px;
 }
 
-img {
-    display: block;
-    margin-bottom: 15px;
+.reframe {
+    height: 170px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.reframe img {
+    height: auto;
+    width: 200px;
+    border:1px solid #084b81;
+}
+
+.upload-file-form {
+    margin-top: 15px;
 }
 
 th {
