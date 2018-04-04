@@ -3,7 +3,7 @@ h1,h2,h3,h4{
 }
 #events-content,#rec-content,#dir-content,#gator-times-content{
   background-color: #fff;
-  height: 70%;
+  height: 100%;
   overflow: auto;
   margin-bottom: 0;
   padding-bottom: 0;

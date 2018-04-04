@@ -1,10 +1,14 @@
 h2,h3,h4,p{
   font-weight: 200;
 }
+h1{
+  font-size: 6em;
+
+}
 h2{
   color: #d84315;
   border-bottom: 2px;
-  font-size: 6em;
+  font-size: 4em;
 }
 h3{
   color: #084b81;
@@ -13,19 +17,32 @@ h4{
   color: #d84315;
   font-size: 2em;
 }
+.left-side{
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+.right-side{
+  float: right;
+  height: 100%;
+  width: 50%;
+}
 .event-info{
   margin-left: 5%;
 }
+.event-details{
+  margin-left: 5%;
+  margin-right: 1%;
+}
 .description{
-  width: 40%;
+  width: 80%;
   font-size: 1.5em;
-  float: right;
   margin-right: 12%;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 .description h3{
   padding: 0;
-  margin: 0;
 }
 .btn{
   background-color: #d84315;
@@ -37,9 +54,8 @@ h4{
   margin-top: 5%;
 }
 .event-banner-pic{
-  float: right;
   margin-top: 2%;
-  width: 40%;
+  width: 80%;
   box-shadow:  .2em .3em rgba(0,0,0,.2);
   margin-right: 12%;
 }
@@ -49,9 +65,17 @@ h4{
 }
 .tags i{
   color: #ffab40;
+  padding-left: 1%;
 }
 .tags a{
   color: #ffab40;
+}
+p{
+  margin-bottom: 0;
+}
+.admin-commands{
+  float: left;
+  font-weight: 200;
 }
 .admin-commands i{
   color: #d84315;
@@ -59,4 +83,8 @@ h4{
 .admin-commands a{
   color: #d84315;
   padding-right: 2em;
+}
+#saveEvent{
+  float: right;
+  margin-right: 20%;
 }
