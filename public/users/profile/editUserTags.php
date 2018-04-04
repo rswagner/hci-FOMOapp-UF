@@ -50,11 +50,6 @@
 	<link rel="stylesheet" href="../css/pretty-checkbox.min.css">
     <script type="text/javascript" src="../javascript/main.js"></script>
 <style>
-table {
-    font-family: "Roboto", sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
 td, th {
 	border: 1px; 
@@ -70,7 +65,11 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #FFBB6F;
 }
-html,body,h1,h2,h3,h4,h5,h6,input {font-family: "Roboto", sans-serif;}
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
 
 input[type=checkbox] ~ div  {
 	display:none; 

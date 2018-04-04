@@ -1,27 +1,24 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php $page_title = 'Edit Tags';
-  if(!isset($_GET['id'])) {
-    redirect_to(url_for('/users/allEvents.php'));
-  }
-  $id = $_GET['id'] ;
 
   if (is_post_request()){
-    $sql = "DELETE FROM users.EventTags WHERE EventID = '" . $id . "'";
+    $sql = "DELETE FROM users.UserTags WHERE StudentID = '" . $_SESSION['id'] . "'";
     $result = mysqli_query($db, $sql);
 
     if ($result){
       foreach($_POST['checkTagList'] as $checkTagID) {
-        $sql = "INSERT INTO users.EventTags";
-        $sql .= "(TagID, EventID) ";
+        $sql = "INSERT INTO users.UserTags";
+        $sql .= "(TagID, StudentID) ";
         $sql .= "VALUES (";
         $sql .= "'" . $checkTagID . "',";
-        $sql .= "'" . $id . "'";
+        $sql .= "'" . $_SESSION['id'] . "'";
         $sql .= ")";
         $result = mysqli_query($db, $sql);
 
       }
-      redirect_to(url_for('/users/singleEvent/info.php?id=' . $id));
+      redirect_to(url_for('/users/profile/profile.php'));
+
     } else {
       // UPDATE failed
       echo mysqli_error($db);
@@ -65,7 +62,11 @@ td, th {
     text-align: left;
     padding: 6px;
 }
-
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
 tr:nth-child(even) {
 	color:black; 
     background-color: #89B2D6
@@ -99,7 +100,7 @@ input[type=checkbox]:checked ~ div {
 </head>
 
 	
-<form action="<?php echo url_for('/users/singleEvent/editEventTags.php?id=' . $id)?>" method="post">
+<form action="<?php echo url_for('/users/profile/editUserTags.php')?>" method="post">
 
     <table style="border:5px; padding: 6px; margin-top:2em; font-family: 'Roboto', sans-serif; width:80%;" align="center">
 	  <col width="30%">
