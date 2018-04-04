@@ -7,7 +7,7 @@ if(!isset($_GET['id'])) {
 }
   $id = $_GET['id'];
 
-  $sql = "SELECT users.Events.*, users.Organizations.OrganizationName FROM users.Events ";
+  $sql = "SELECT users.Events.*, users.Organizations.OrganizationName, users.Organizations.OrganizationID FROM users.Events ";
   $sql .= "INNER JOIN users.Organizations ON users.Events.OrganizationID = users.Organizations.OrganizationID ";
   $sql .= "WHERE EventID ='" . $id . "'";
   $single_event_set = mysqli_query($db, $sql);
@@ -83,10 +83,17 @@ if(!isset($_GET['id'])) {
             </div>
             <?php }?>
         </div>
-
+        <?php if ($_SESSION['type'] == "student"){ ?>
+          <h3>
+            <a href="<?php echo url_for('/users/profile/orgInfo.php?id=' . $event['OrganizationID']);?>">
+              By <?php echo  $event['OrganizationName'];?>
+            </a>
+          </h3>
+        <?php }else { ?>
         <h3>By
             <?php echo  $event['OrganizationName'];?>
         </h3>
+      <?php } ?>
         <h4>
             <?php echo $event['Location']; ?>
         </h4>
