@@ -147,19 +147,18 @@ if (is_post_request()){
 </script>
 <h1>CREATE A NEW EVENT</h1>
   <div class="page-content">
-
     <div class="row">
-    <form class="col s12"action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post" enctype="multipart/form-data">
+    <form class="col s12" action="<?php echo url_for('/users/singleEvent/create.php');?>" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s6">
-          <input id="eventName" type="text" class="validate">
+          <input id="eventName" name="eventName" type="text" class="validate">
           <label for="eventName">Name of the Event</label>
         </div>
         <div class="input-field col s6">
           <div class="file-field input-field">
             <div class="btn">
               <span>Select Picture</span>
-                <input type="file" name= "fileToUpload" style="margin-bottom:20px;border-bottom:.990px">
+                <input type="file" id="fileToUpload" name= "fileToUpload" style="margin-bottom:20px;border-bottom:.990px">
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
@@ -175,23 +174,23 @@ if (is_post_request()){
           <input type="hidden" id="location" name="location" />
         </div>
         <div class="input-field col s6">
-          <input name="date" type="text" class="datepicker">
+          <input name="date" type="date" class="datepicker">
           <label for="date">Date</label>
         </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input name="startTime" type="text" class="timepicker" >
-            <label for="startTime">Start Time</label>
+            <label class="active" for="startTime">Start Time</label>
+            <input name="startTime" type="text" class="timepicker" value="--:--" >
           </div>
           <div class="input-field col s6">
-            <input name="endTime" type="text" class="timepicker" >
-            <label for="endtime">End Time</label>
+            <label class="active" for="endtime">End Time</label>
+            <input name="endTime" type="text" class="timepicker" value="--:--">
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" data-length="200"></textarea>
+            <textarea id="textarea1" class="materialize-textarea" data-length="300"></textarea>
             <label for="textarea1">Event Description</label>
           </div>
         </div>
@@ -199,7 +198,6 @@ if (is_post_request()){
             <i class="material-icons right">send</i>
           </button>
         </form>
-    </form>
   </div>
   </div>
 <footer>

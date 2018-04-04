@@ -1,13 +1,19 @@
 $(document).ready(function () {
   $(".datepicker").pickadate({
     closeOnSelect: true,
-    format: "dd/mm/yyyy"
+    format: "mm/dd/yyyy"
   });
   $('.timepicker').pickatime({
-      default: 'now',
-      twelvehour: true, // change to 12 hour AM/PM clock from 24 hour
-      donetext: 'OK',
-    autoclose: false,
-    vibrate: true // vibrate the device when dragging clock hand
-  });
+  default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+  fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+  twelvehour: true, // Use AM/PM or 24-hour format
+  donetext: 'OK', // text for done-button
+  cleartext: 'Clear', // text for clear-button
+  canceltext: 'Cancel', // Text for cancel-button,
+  container: undefined, // ex. 'body' will append picker to body
+  autoclose: false, // automatic close timepicker
+  ampmclickable: true, // make AM PM clickable
+  aftershow: function(){} //Function for after opening timepicker
+});
+
 });

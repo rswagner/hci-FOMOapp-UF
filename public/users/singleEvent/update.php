@@ -144,25 +144,65 @@ if(is_post_request()) {
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-<form action="<?php echo url_for('/users/singleEvent/update.php?id=' . $id);?>" method="post" enctype="multipart/form-data">
-  Event Name:<br />
-  <input type="text" name="eventName" value="<?php echo $event['EventName']; ?>" /><br/>
-  Select Event Picture:<br/>
-  <input type="file" name= "fileToUpload" id="fileToUpload"><br/>
-  Location:<br/>
-  <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" placeholder="<?php echo $event['Location']?>"/><br/>
-  <input type="hidden" id="cityLat" name="lat" />
-  <input type="hidden" id="cityLng" name="long" />
-  <input type="hidden" id="location" name="location" />
-  Date: (MM/DD/YYYY)<br />
-  <input type="date" name="date" value="<?php echo $event['Date']; ?>" /><br/>
-  Start Time:<br/>
-  <input type="time" name="startTime" value="<?php echo $event['StartTime']; ?>" /><br/>
-  End Time:<br/>
-  <input type="time" name="endTime" value="<?php echo $event['EndTime']; ?>" /><br/>
-  Description<br/>
-  <textarea name="description" cols="40" rows="5"><?php echo $event['Description']; ?></textarea><br>
-  <input type="submit" name="submit" value="Submit"  />
-</form>
+<title>Edit Event View</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript" src="<?=WWW_ROOT?>/javascript/createEvent.js"></script>
+<link rel="stylesheet" href="<?=WWW_ROOT?>/css/create.css">
+
+<h1>Edit Event</h1>
+<div class="page-content">
+  <div class="row">
+  <form class="col s12" action="<?php echo url_for('/users/singleEvent/update.php?id=' . $id);?>" method="post" enctype="multipart/form-data">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="eventName"  type="text" name="eventName" value="<?php echo $event['EventName']; ?>">
+      </div>
+      <div class="input-field col s6">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Select Picture</span>
+              <input id="fileToUpload" type="file" name= "fileToUpload" style="margin-bottom:20px;border-bottom:.990px">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="searchTextField" type="text" size="50" autocomplete="on" runat="server" placeholder="<?php echo $event['Location']?>" />
+        <input type="hidden" id="cityLat" name="lat" />
+        <input type="hidden" id="cityLng" name="long" />
+        <input type="hidden" id="location" name="location" />
+      </div>
+      <div class="input-field col s6">
+        <input name="date" type="text" class="datepicker" value="<?php echo date('m/d/Y', strtotime($event['Date']));?>">
+        <label for="date">Date</label>
+      </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <label class="active" for="startTime">Start Time</label>
+          <input id="startTime" name="startTime" type="text" class="timepicker" value="<?php echo date('h:i a', strtotime($event['StartTime'])); ?>" >
+        </div>
+        <div class="input-field col s6">
+          <label class="active" for="endtime">End Time</label>
+          <input id='endtime' name="endTime" type="text" class="timepicker" value="<?php echo date('h:i a', strtotime($event['EndTime'])); ?>" >
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea  name="description" id="textarea1" class="materialize-textarea" ><?php echo $event['Description']; ?>></textarea>
+          <label for="textarea1">Event Description</label>
+        </div>
+      </div>
+        <button class="btn waves-effect waves-light" type="submit" name="submit" id="submit">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+</div>
+</div>
 
 </html>
