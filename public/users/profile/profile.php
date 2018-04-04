@@ -176,7 +176,7 @@ if (is_post_request()){
         <p><?php echo $info['OrganizationDescription']; ?></p>
       <?php } ?>
     </div>
-  </body>
+    <div style="height: 50px;"></div>
     <footer>
         <div class="footer-bar">
             <center>
@@ -184,6 +184,7 @@ if (is_post_request()){
             </center>
         </div>
     </footer>
+  </body>
 </html>
 <script>
     var inputs = document.querySelectorAll( '.inputfile' );
