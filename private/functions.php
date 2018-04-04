@@ -7,7 +7,7 @@ function url_for($script_path) {
   }
   return WWW_ROOT . $script_path;
 }
-function h($string="") {
+function h($string) {
   return htmlspecialchars($string);
 }
 function redirect_to($location) {

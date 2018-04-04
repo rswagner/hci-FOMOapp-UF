@@ -57,6 +57,11 @@ td {
     color: #084b81;
 }
 
+tr td:last-child{
+    width:1%;
+    white-space:nowrap;
+}
+
 .event-name-column-header {
     color: #084b81;
     margin: 0px;
