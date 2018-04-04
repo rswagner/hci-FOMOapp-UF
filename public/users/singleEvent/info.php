@@ -89,19 +89,16 @@ if(!isset($_GET['id'])) {
               By <?php echo  $event['OrganizationName'];?>
             </a>
           </h3>
-          <h4>
-            <a href="https://maps.google.com/?ll=<?php echo $event['Latitude']?>,<?php echo $event['Longitude']?>" target="_blank">
-              <?php echo $event['Location']; ?>
-            </a>
-          </h4>
         <?php }else { ?>
         <h3>By
             <?php echo  $event['OrganizationName'];?>
         </h3>
-        <h4>
-            <?php echo $event['Location']; ?>
-        </h4>
       <?php } ?>
+        <h4>
+          <a href="https://maps.google.com/?ll=<?php echo $event['Latitude']?>,<?php echo $event['Longitude']?>" target="_blank">
+            <?php echo $event['Location']; ?>
+          </a>
+        </h4>
         <h4>
             <?php echo date('m/d/Y', strtotime($event['Date'])); ?>
         </h4>

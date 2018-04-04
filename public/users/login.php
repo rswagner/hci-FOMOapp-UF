@@ -64,7 +64,8 @@ if(is_post_request()) {
                 <input type="password" name="password" value="" /><br/>
                 <div class="button login">
                   <button><span>LOGIN</span></button>
-                <!-- </div><a class="pass-forgot" href="">Forgot your password?</a> -->
+                </div>
+                <!-- <a class="pass-forgot" href="">Forgot your password?</a> -->
                 <input type="radio" name="type" id="student" value="student">
                 <label for="student">Student</label>
                 <input type="radio" name="type" id="org" value="org">
